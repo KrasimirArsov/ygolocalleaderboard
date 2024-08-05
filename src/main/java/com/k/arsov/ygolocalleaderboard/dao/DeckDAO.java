@@ -1,54 +1,15 @@
 package com.k.arsov.ygolocalleaderboard.dao;
 
 import com.k.arsov.ygolocalleaderboard.entity.Deck;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.TypedQuery;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
-public class DeckDAO implements DAO
-{
-    private EntityManager entityManager;
+public interface DeckDAO {
+    List<Deck> findAll();
 
-        @Autowired
-        public DeckDAO(EntityManager theEntityManager)
-        {
-            entityManager = theEntityManager;
-        }
+    Deck findById(int theId);
 
-    @Override
-    public List<Deck> findAll() {
-        //create query
-        TypedQuery<Deck> theQuery = entityManager.createQuery("from Deck", Deck.class);
+    Deck save(Deck theDeck);
 
-        //execute query
-        List<Deck> decks = theQuery.getResultList();
-
-        //return
-        return decks;
-    }
-
-    @Override
-    public Deck findById(int theId) {
-        Deck theDeck = entityManager.find(Deck.class, theId);
-
-        return theDeck;
-    }
-
-    @Override
-    public Deck save(Deck theDeck) {
-        Deck dbDeck = entityManager.merge(theDeck);
-
-        return dbDeck;
-    }
-
-    @Override
-    public void deleteById(int theId) {
-        Deck theDeck = entityManager.find(Deck.class, theId);
-
-        entityManager.remove(theDeck);
-    }
+    void deleteById(int theId);
 }

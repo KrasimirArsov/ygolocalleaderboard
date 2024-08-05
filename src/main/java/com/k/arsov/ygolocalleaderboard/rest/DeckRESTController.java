@@ -1,7 +1,7 @@
 package com.k.arsov.ygolocalleaderboard.rest;
 
 import com.k.arsov.ygolocalleaderboard.entity.Deck;
-import com.k.arsov.ygolocalleaderboard.service.Service;
+import com.k.arsov.ygolocalleaderboard.service.DeckService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,25 +11,25 @@ import java.util.List;
 @RequestMapping("/api")
 public class DeckRESTController
 {
-    private Service service;
+    private DeckService deckService;
 
     @Autowired
-    public DeckRESTController(Service theService)
+    public DeckRESTController(DeckService theDeckService)
     {
-        service = theService;
+        deckService = theDeckService;
     }
 
 
     @GetMapping("/decks")
     public List<Deck> findAll()
     {
-        return service.findAll();
+        return deckService.findAll();
     }
 
     @GetMapping("/decks/{deckId}")
     public Deck getDeck(@PathVariable int deckId)
     {
-        Deck theDeck = service.findById(deckId);
+        Deck theDeck = deckService.findById(deckId);
 
         if(theDeck == null)
         {
@@ -44,7 +44,7 @@ public class DeckRESTController
     {
         theDeck.setId(0);
 
-        Deck dbDeck = service.save(theDeck);
+        Deck dbDeck = deckService.save(theDeck);
 
         return dbDeck;
     }
@@ -52,7 +52,7 @@ public class DeckRESTController
     @PutMapping("/decks")
     public Deck updateDeck(@RequestBody Deck theDeck)
     {
-        Deck dbDeck = service.save(theDeck);
+        Deck dbDeck = deckService.save(theDeck);
 
         return dbDeck;
     }
@@ -60,14 +60,14 @@ public class DeckRESTController
     @DeleteMapping("/decks/{deckId}")
     public String deleteDeck(@PathVariable int deckId)
     {
-        Deck tempDeck = service.findById(deckId);
+        Deck tempDeck = deckService.findById(deckId);
 
         if(tempDeck == null)
         {
             throw new RuntimeException("Deck id not found - " + deckId);
         }
 
-        service.deleteById(deckId);
+        deckService.deleteById(deckId);
 
         return "Deleted deck with id - " + deckId;
     }
