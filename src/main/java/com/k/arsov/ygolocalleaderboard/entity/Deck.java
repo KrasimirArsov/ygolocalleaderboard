@@ -2,6 +2,8 @@ package com.k.arsov.ygolocalleaderboard.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name="Deck")
 public class Deck
