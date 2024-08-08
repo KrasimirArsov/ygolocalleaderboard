@@ -3,6 +3,8 @@ package com.k.arsov.ygolocalleaderboard.rest;
 import com.k.arsov.ygolocalleaderboard.entity.Player;
 import com.k.arsov.ygolocalleaderboard.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,7 +35,7 @@ public class PlayerRESTController
 
         if(thePlayer == null)
         {
-            throw new RuntimeException("Player ID not found." + playerId);
+            throw new NotFoundException("Player ID not found." + playerId);
         }
 
         return thePlayer;
@@ -64,11 +66,24 @@ public class PlayerRESTController
 
         if(tempPlayer == null)
         {
-            throw new RuntimeException("Player id not found - " + playerId);
+            throw new NotFoundException("Player id not found - " + playerId);
         }
 
         playerService.deleteById(playerId);
 
         return "Deleted player with id - " + playerId;
     }
+
+    @ExceptionHandler
+    public ResponseEntity<ErrorResponse> handleException(NotFoundException exc)
+    {
+        ErrorResponse error = new ErrorResponse();
+
+        error.setStatus(HttpStatus.NOT_FOUND.value());
+        error.setMessage(exc.getMessage());
+        error.setTimeStamp(System.currentTimeMillis());
+
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
 }

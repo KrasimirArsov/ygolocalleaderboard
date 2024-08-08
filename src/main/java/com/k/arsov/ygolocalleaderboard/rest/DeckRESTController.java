@@ -3,6 +3,8 @@ package com.k.arsov.ygolocalleaderboard.rest;
 import com.k.arsov.ygolocalleaderboard.entity.Deck;
 import com.k.arsov.ygolocalleaderboard.service.DeckService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,7 +35,7 @@ public class DeckRESTController
 
         if(theDeck == null)
         {
-            throw new RuntimeException("Deck ID not found." + deckId);
+            throw new NotFoundException("Deck ID not found." + deckId);
         }
 
         return theDeck;
@@ -64,11 +66,23 @@ public class DeckRESTController
 
         if(tempDeck == null)
         {
-            throw new RuntimeException("Deck id not found - " + deckId);
+            throw new NotFoundException("Deck id not found - " + deckId);
         }
 
         deckService.deleteById(deckId);
 
         return "Deleted deck with id - " + deckId;
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<ErrorResponse> handleException(NotFoundException exc)
+    {
+        ErrorResponse error = new ErrorResponse();
+
+        error.setStatus(HttpStatus.NOT_FOUND.value());
+        error.setMessage(exc.getMessage());
+        error.setTimeStamp(System.currentTimeMillis());
+
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 }

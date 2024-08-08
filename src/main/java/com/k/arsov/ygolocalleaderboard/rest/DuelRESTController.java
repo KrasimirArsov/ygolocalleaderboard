@@ -3,6 +3,8 @@ package com.k.arsov.ygolocalleaderboard.rest;
 import com.k.arsov.ygolocalleaderboard.entity.Duel;
 import com.k.arsov.ygolocalleaderboard.service.DuelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,7 +35,7 @@ public class DuelRESTController
 
         if(theDuel == null)
         {
-            throw new RuntimeException("Duel ID not found." + duelId);
+            throw new NotFoundException("Duel ID not found." + duelId);
         }
 
         return theDuel;
@@ -64,11 +66,23 @@ public class DuelRESTController
 
         if(tempDuel == null)
         {
-            throw new RuntimeException("Duel id not found - " + duelId);
+            throw new NotFoundException("Duel id not found - " + duelId);
         }
 
         duelService.deleteById(duelId);
 
         return "Deleted duel with id - " + duelId;
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<ErrorResponse> handleException(NotFoundException exc)
+    {
+        ErrorResponse error = new ErrorResponse();
+
+        error.setStatus(HttpStatus.NOT_FOUND.value());
+        error.setMessage(exc.getMessage());
+        error.setTimeStamp(System.currentTimeMillis());
+
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 }
