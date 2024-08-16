@@ -1,7 +1,9 @@
 package com.k.arsov.ygolocalleaderboard.rest;
 
 import com.k.arsov.ygolocalleaderboard.entity.Deck;
-import com.k.arsov.ygolocalleaderboard.service.DeckService;
+import com.k.arsov.ygolocalleaderboard.rest.response.ErrorResponse;
+import com.k.arsov.ygolocalleaderboard.rest.response.NotFoundException;
+import com.k.arsov.ygolocalleaderboard.service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,10 +15,10 @@ import java.util.List;
 @RequestMapping("/api")
 public class DeckRESTController
 {
-    private DeckService deckService;
+    private Service<Deck> deckService;
 
     @Autowired
-    public DeckRESTController(DeckService theDeckService)
+    public DeckRESTController(Service<Deck> theDeckService)
     {
         deckService = theDeckService;
     }

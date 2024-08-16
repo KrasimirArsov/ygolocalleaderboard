@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class DuelDAOImpl implements DuelDAO
+public class DuelDAOImpl implements DAO<Duel>
 {
     private EntityManager entityManager;
 

@@ -1,7 +1,9 @@
 package com.k.arsov.ygolocalleaderboard.rest;
 
 import com.k.arsov.ygolocalleaderboard.entity.Player;
-import com.k.arsov.ygolocalleaderboard.service.PlayerService;
+import com.k.arsov.ygolocalleaderboard.rest.response.ErrorResponse;
+import com.k.arsov.ygolocalleaderboard.rest.response.NotFoundException;
+import com.k.arsov.ygolocalleaderboard.service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,10 +15,10 @@ import java.util.List;
 @RequestMapping("/api")
 public class PlayerRESTController
 {
-    private PlayerService playerService;
+    private Service<Player> playerService;
 
     @Autowired
-    public PlayerRESTController(PlayerService thePlayerService)
+    public PlayerRESTController(Service<Player> thePlayerService)
     {
         playerService = thePlayerService;
     }
@@ -42,13 +44,15 @@ public class PlayerRESTController
     }
 
     @PostMapping("/players")
-    public Player addPlayer(@RequestBody Player thePlayer)
+    public ResponseEntity<Player> addPlayer(@RequestBody Player thePlayer)
     {
         thePlayer.setId(0);
 
         Player dbPlayer = playerService.save(thePlayer);
 
-        return dbPlayer;
+        ResponseEntity<Player> response = new ResponseEntity<>(dbPlayer, HttpStatus.CREATED);
+
+        return response;
     }
 
     @PutMapping("/players")

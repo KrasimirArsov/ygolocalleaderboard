@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class DeckDAOImpl implements DeckDAO
+public class DeckDAOImpl implements DAO<Deck>
 {
     private EntityManager entityManager;
 

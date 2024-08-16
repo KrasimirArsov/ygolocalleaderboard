@@ -1,4 +1,4 @@
-package com.k.arsov.ygolocalleaderboard.rest;
+package com.k.arsov.ygolocalleaderboard.rest.response;
 
 public class ErrorResponse
 {
