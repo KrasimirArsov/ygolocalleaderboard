@@ -2,7 +2,7 @@ package com.k.arsov.ygolocalleaderboard.service;
 
 import java.util.List;
 
-public interface Service <T>
+public interface CRUDService<T>
 {
     List<T> findAll();
 
