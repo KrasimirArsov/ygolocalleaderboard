@@ -16,6 +16,10 @@ public class Deck
     @Column(name="name")
     private String name;
 
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    @JoinColumn(name = "deckId")
+    private List<DeckCard> cards;
+
     public Deck()
     {
 
@@ -24,6 +28,12 @@ public class Deck
     public Deck(int id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public Deck(int id, String name, List<DeckCard> cards) {
+        this.id = id;
+        this.name = name;
+        this.cards = cards;
     }
 
     public int getId() {
@@ -40,6 +50,14 @@ public class Deck
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<DeckCard> getCards() {
+        return cards;
+    }
+
+    public void setCards(List<DeckCard> cards) {
+        this.cards = cards;
     }
 
     @Override

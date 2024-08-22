@@ -1,6 +1,7 @@
-package com.k.arsov.ygolocalleaderboard.entity;
+package com.k.arsov.ygolocalleaderboard.entity.external;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.*;
 
 public class SetCard
 {

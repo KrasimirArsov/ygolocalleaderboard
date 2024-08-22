@@ -1,6 +1,6 @@
 package com.k.arsov.ygolocalleaderboard.service;
 
-import com.k.arsov.ygolocalleaderboard.entity.SetCard;
+import com.k.arsov.ygolocalleaderboard.entity.external.SetCard;
 import org.springframework.web.client.RestTemplate;
 
 @org.springframework.stereotype.Service

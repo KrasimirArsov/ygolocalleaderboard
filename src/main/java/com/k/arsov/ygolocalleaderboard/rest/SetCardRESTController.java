@@ -1,8 +1,6 @@
 package com.k.arsov.ygolocalleaderboard.rest;
 
-import com.k.arsov.ygolocalleaderboard.entity.Player;
-import com.k.arsov.ygolocalleaderboard.entity.SetCard;
-import com.k.arsov.ygolocalleaderboard.service.CRUDService;
+import com.k.arsov.ygolocalleaderboard.entity.external.SetCard;
 import com.k.arsov.ygolocalleaderboard.service.ExternalYGOProService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
