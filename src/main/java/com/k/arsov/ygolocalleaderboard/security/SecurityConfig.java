@@ -60,7 +60,18 @@ public class SecurityConfig
                         .requestMatchers(HttpMethod.PUT, "/api/duels").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/duels/**").hasRole("ADMIN")
 
-                        .requestMatchers(HttpMethod.GET, "/api/set-cards/**").hasRole("PLAYER"));
+                        .requestMatchers(HttpMethod.GET, "/api/set-cards").hasRole("PLAYER")
+                        .requestMatchers(HttpMethod.GET, "/api/set-cards/**").hasRole("PLAYER")
+                        .requestMatchers(HttpMethod.POST, "/api/set-cards").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/set-cards").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/set-cards/**").hasRole("ADMIN")
+
+                        .requestMatchers(HttpMethod.GET, "/decks").hasRole("PLAYER")
+                        .requestMatchers(HttpMethod.GET, "/decks/**").hasRole("PLAYER")
+                        .requestMatchers(HttpMethod.POST, "/decks").hasRole("ADMIN")
+
+                        .requestMatchers(HttpMethod.GET, "/css/styles.css").hasRole("PLAYER")
+        );
 
         http.httpBasic(Customizer.withDefaults());
         http.csrf(csrf -> csrf.disable());

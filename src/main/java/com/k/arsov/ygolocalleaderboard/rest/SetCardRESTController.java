@@ -1,28 +1,68 @@
 package com.k.arsov.ygolocalleaderboard.rest;
 
-import com.k.arsov.ygolocalleaderboard.entity.external.SetCard;
-import com.k.arsov.ygolocalleaderboard.service.ExternalYGOProService;
+import com.k.arsov.ygolocalleaderboard.entity.SetCard;
+import com.k.arsov.ygolocalleaderboard.rest.response.NotFoundException;
+import com.k.arsov.ygolocalleaderboard.service.CRUDService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
 public class SetCardRESTController
 {
-    private ExternalYGOProService setCardService;
+    private static final Logger logger = LoggerFactory.getLogger(SetCardRESTController.class);
+    private CRUDService<SetCard> deckCardService;
 
     @Autowired
-    public SetCardRESTController(ExternalYGOProService theService)
+    public SetCardRESTController(CRUDService<SetCard> theDeckCardService)
     {
-        setCardService = theService;
+        deckCardService = theDeckCardService;
     }
 
-    @GetMapping("/set-cards/{cardSet}")
-    public SetCard findBySet(@PathVariable String cardSet)
+
+    @GetMapping("/set-cards")
+    public List<SetCard> findAll()
     {
-        return setCardService.fetchSetCard(cardSet);
+        return deckCardService.findAll();
+    }
+
+    @GetMapping("/set-cards/{deckCardId}")
+    public SetCard getDeckCard(@PathVariable int deckCardId)
+    {
+        SetCard theDeckCard = deckCardService.findById(deckCardId);
+
+        if(theDeckCard == null)
+        {
+            throw new NotFoundException("DeckCard ID not found." + deckCardId);
+        }
+
+        return theDeckCard;
+    }
+
+    @PutMapping("/set-cards")
+    public SetCard updateDeckCard(@RequestBody SetCard theDeckCard)
+    {
+        SetCard dbPlayer = deckCardService.save(theDeckCard);
+
+        return dbPlayer;
+    }
+
+    @DeleteMapping("/set-cards/{deckCardId}")
+    public String deleteDeckCard(@PathVariable int deckCardId)
+    {
+        SetCard tempDeckCard = deckCardService.findById(deckCardId);
+
+        if(tempDeckCard == null)
+        {
+            throw new NotFoundException("DeckCard id not found - " + deckCardId);
+        }
+
+        deckCardService.deleteById(deckCardId);
+
+        return "Deleted DeckCard with id - " + deckCardId;
     }
 }

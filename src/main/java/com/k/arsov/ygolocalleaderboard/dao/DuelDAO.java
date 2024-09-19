@@ -9,12 +9,12 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class DuelDAOImpl implements DAO<Duel>
+public class DuelDAO implements DAO<Duel>
 {
     private EntityManager entityManager;
 
     @Autowired
-    public DuelDAOImpl(EntityManager theEntityManager)
+    public DuelDAO(EntityManager theEntityManager)
         {
             entityManager = theEntityManager;
         }

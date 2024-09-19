@@ -8,12 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @org.springframework.stereotype.Service
-public class DuelServiceImpl implements CRUDService<Duel>
+public class DuelServicе implements CRUDService<Duel>
 {
     public DAO<Duel> duelDAO;
 
     @Autowired
-    public DuelServiceImpl(DAO<Duel> theDuelDAO)
+    public DuelServicе(DAO<Duel> theDuelDAO)
     {
         duelDAO = theDuelDAO;
     }

@@ -4,10 +4,12 @@ import com.k.arsov.ygolocalleaderboard.entity.misc.WinCondition;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.time.LocalDate;
 
 @Entity
-@Table(name="Duel")
+@Table(name="duel")
 public class Duel
 {
     @Id
@@ -15,31 +17,31 @@ public class Duel
     @Column(name="id")
     private int id;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "player1Id")
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.DETACH})
+    @JoinColumn(name = "player_one_id")
     private Player player1;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "deck1id")
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.DETACH})
+    @JoinColumn(name = "deck_one_id")
     private Deck deck1;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "player2id")
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.DETACH})
+    @JoinColumn(name = "player_two_id")
     private Player player2;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "deck2id")
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.DETACH})
+    @JoinColumn(name = "deck_two_id")
     private Deck deck2;
 
     @Column(name = "result")
     private int result;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "wincondition")
+    @Column(name = "win_condition")
     private WinCondition winCondition;
 
-    @Column(name = "date")
-    private Date date;
+    @Column(name = "duel_date")
+    private Timestamp duelDate;
 
     public Duel()
     {
@@ -54,7 +56,7 @@ public class Duel
         this.deck2 = deck2;
         this.result = result;
         this.winCondition = winCondition;
-        this.date = Date.valueOf(LocalDate.now());
+        this.duelDate = Timestamp.from(Instant.now());
     }
 
     public int getId() {
@@ -113,11 +115,11 @@ public class Duel
         this.winCondition = winCondition;
     }
 
-    public Date getDate() {
-        return date;
+    public Timestamp getDate() {
+        return duelDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDate(Timestamp timestamp) {
+        this.duelDate = timestamp;
     }
 }

@@ -8,12 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @org.springframework.stereotype.Service
-public class PlayerServiceImpl implements CRUDService<Player>
+public class PlayerService implements CRUDService<Player>
 {
     public DAO<Player> playerDAO;
 
     @Autowired
-    public PlayerServiceImpl(DAO<Player> thePlayerDAO)
+    public PlayerService(DAO<Player> thePlayerDAO)
     {
         playerDAO = thePlayerDAO;
     }

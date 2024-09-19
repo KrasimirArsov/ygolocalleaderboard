@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All Decks</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+</head>
+<body>
+<h1>Decks</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="deck : ${decks}">
+        <td th:text="${deck.id}"></td>
+        <td th:text="${deck.name}"></td>
+        <td>
+            <a th:href="@{/decks/{id}(id=${deck.id})}">View</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="/decks/new">Create New Deck</a>
+</body>
+</html>

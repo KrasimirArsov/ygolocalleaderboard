@@ -1,78 +1,48 @@
 CREATE DATABASE yugioh;
 
-CREATE TABLE Player(
+CREATE TABLE player(
 id int primary key auto_increment,
-name varchar(32)
-);
-
-INSERT INTO Player (name) VALUES ('Krasimir');
-INSERT INTO Player (name) VALUES ('Rumen');
-INSERT INTO Player (name) VALUES ('Dinko');
-INSERT INTO Player (name) VALUES ('Koceto');
-INSERT INTO Player (name) VALUES ('Alexander');
-INSERT INTO Player (name) VALUES ('Niki2');
-INSERT INTO Player (name) VALUES ('Niki3');
-
-CREATE TABLE Deck(
-id int primary key auto_increment,
-name varchar(32)
-);
-
-INSERT INTO Deck (name) VALUES ('Ultimate Insect');
-INSERT INTO Deck (name) VALUES ('Water Dedalus');
-INSERT INTO Deck (name) VALUES ('Dark Paladin');
-INSERT INTO Deck (name) VALUES ('Ojama Armed');
-INSERT INTO Deck (name) VALUES ('Silent Magician');
-INSERT INTO Deck (name) VALUES ('Slifer Jam');
-INSERT INTO Deck (name) VALUES ('Ra Burn');
-INSERT INTO Deck (name) VALUES ('Jinzo Controll');
-
-CREATE TABLE Duelist(
-id int primary key auto_increment,
-playerId int,
-deckId int,
-foreign key (playerId) references Player(id),
-foreign key (deckId) references Deck(id)
-);
-
-ALTER TABLE Duelist
-ADD CONSTRAINT pdUnique UNIQUE (playerId, deckId);
-
-SELECT * FROM Player;
-SELECT * FROM Deck;
-
-SELECT id FROM Player WHERE name = 'Rumen';
-SELECT id FROM Deck WHERE name = 'Water Dedalus';
-
-CREATE TABLE Duel(
-id int primary key auto_increment,
-player1Id int,
-deck1Id int,
-player2Id int,
-deck2Id int,
-result int,
-foreign key (player1Id) references Player(id),
-foreign key (player2Id) references Player(id),
-foreign key (deck1Id) references Deck(id),
-foreign key (deck2Id) references Deck(id),
-CHECK (player1Id != player2Id),
-CHECK (deck1Id != deck2Id)
+name varchar(32) NOT NULL
 );
 
 
-INSERT INTO Duel (player1Id, deck1Id, player2Id, deck2Id, result)
-VALUES (3, 3, 4, 4, 2);
+CREATE TABLE deck(
+id int primary key auto_increment,
+name varchar(32) NOT NULL
+);
 
 
-SELECT COUNT(*) AS victoriesPlayer FROM Duel WHERE (player1Id = 2 AND result = 1) OR (player2Id = 2 AND result = 2);
+CREATE TABLE duel(
+id int primary key auto_increment,
+player_one_id int NOT NULL,
+deck_one_id int NOT NULL,
+player_two_id int NOT NULL,
+deck_two_id int NOT NULL,
+result int NOT NULL,
+win_condition ENUM('LP_Depletion', 'Exodia', 'Final_Countdown', 'Vennominaga', 'Last_Turn', 'Destiny_Board') NOT NULL DEFAULT 'LP_Depletion',
+duel_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+foreign key (player_one_id) references player(id),
+foreign key (player_two_id) references player(id),
+foreign key (deck_one_id) references deck(id),
+foreign key (deck_two_id) references deck(id),
+CHECK (player_one_id != player_two_id),
+CHECK (deck_one_id != deck_two_id)
+);
 
-SELECT COUNT(*) AS lossesPlayer FROM Duel WHERE (player1Id = 2 AND result = 2) OR (player2Id = 2 AND result = 1);
 
-SELECT COUNT(*) AS drawsPlayer FROM Duel WHERE (player1Id = 2 AND result = 0) OR (player2Id = 2 AND result = 0);
+CREATE TABLE set_card (
+  set_code VARCHAR(32) NOT NULL,  -- Primary key (set_code)
+  name VARCHAR(255) NOT NULL,
+  set_name VARCHAR(255) NOT NULL,
+  set_rarity VARCHAR(32) NOT NULL,
+  set_price DECIMAL(10, 2) DEFAULT 0.00,
+  PRIMARY KEY (set_code)
+);
 
-
-SELECT COUNT(*) AS victoriesDeck FROM Duel WHERE (deck1Id = 2 AND result = 1) OR (deck2Id = 2 AND result = 2);
-
-SELECT COUNT(*) AS lossesPlayer FROM Duel WHERE (deck1Id = 2 AND result = 2) OR (deck2Id = 2 AND result = 1);
-
-SELECT COUNT(*) AS drawsPlayer FROM Duel WHERE (deck1Id = 2 AND result = 0) OR (deck2Id = 2 AND result = 0);
+CREATE TABLE deck_set_card (
+id int primary key auto_increment,
+deck_id int,
+set_card_id varchar(32),
+foreign key (deck_id) references deck(id),
+foreign key (set_card_id) references set_card(set_code)
+);

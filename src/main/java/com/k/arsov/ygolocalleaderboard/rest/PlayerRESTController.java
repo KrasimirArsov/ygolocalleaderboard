@@ -4,17 +4,21 @@ import com.k.arsov.ygolocalleaderboard.entity.Player;
 import com.k.arsov.ygolocalleaderboard.rest.response.ErrorResponse;
 import com.k.arsov.ygolocalleaderboard.rest.response.NotFoundException;
 import com.k.arsov.ygolocalleaderboard.service.CRUDService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api")
 public class PlayerRESTController
 {
+    private static final Logger logger = LoggerFactory.getLogger(PlayerRESTController.class);
     private CRUDService<Player> playerService;
 
     @Autowired
@@ -77,17 +81,4 @@ public class PlayerRESTController
 
         return "Deleted player with id - " + playerId;
     }
-
-    @ExceptionHandler
-    public ResponseEntity<ErrorResponse> handleException(NotFoundException exc)
-    {
-        ErrorResponse error = new ErrorResponse();
-
-        error.setStatus(HttpStatus.NOT_FOUND.value());
-        error.setMessage(exc.getMessage());
-        error.setTimeStamp(System.currentTimeMillis());
-
-        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
-    }
-
 }

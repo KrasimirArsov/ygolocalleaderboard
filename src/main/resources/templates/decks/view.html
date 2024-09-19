@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>View Deck</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+</head>
+<body>
+<h1>Deck Details</h1>
+<p>ID: <span th:text="${deck.id}"></span></p>
+<p>Name: <span th:text="${deck.name}"></span></p>
+
+<h2>Cards in this Deck</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Set Code</th>
+        <th>Name</th>
+        <th>Set Name</th>
+        <th>Rarity</th>
+        <th>Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Iterate over the list of cards -->
+    <tr th:each="card : ${deck.setCards}">
+        <td th:text="${card.setCode}"></td>
+        <td th:text="${card.name}"></td>
+        <td th:text="${card.setName}"></td>
+        <td th:text="${card.setRarity}"></td>
+        <td th:text="${card.setPrice}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<a href="/decks">Back to Deck List</a>
+</body>
+</html>

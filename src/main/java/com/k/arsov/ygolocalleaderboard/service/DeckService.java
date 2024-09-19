@@ -8,12 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @org.springframework.stereotype.Service
-public class DeckServiceImpl implements CRUDService<Deck>
+public class DeckService implements CRUDService<Deck>
 {
     public DAO<Deck> deckDAO;
 
     @Autowired
-    public DeckServiceImpl(DAO<Deck> theDeckDAO)
+    public DeckService(DAO<Deck> theDeckDAO)
     {
         deckDAO = theDeckDAO;
     }

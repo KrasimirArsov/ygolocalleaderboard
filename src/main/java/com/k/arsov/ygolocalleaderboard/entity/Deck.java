@@ -1,11 +1,13 @@
 package com.k.arsov.ygolocalleaderboard.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
 
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
-@Table(name="Deck")
+@Table(name="deck")
 public class Deck
 {
     @Id
@@ -16,25 +18,26 @@ public class Deck
     @Column(name="name")
     private String name;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
-    @JoinColumn(name = "deckId")
-    private List<DeckCard> cards;
+    @JsonManagedReference
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH})
+    @JoinTable(
+            name = "deck_set_card",
+            joinColumns = @JoinColumn(name = "deck_id"),
+            inverseJoinColumns = @JoinColumn(name = "set_card_id")
+    )
+    private List<SetCard> setCards;
 
     public Deck()
     {
 
     }
 
-    public Deck(int id, String name) {
+    public Deck(int id, String name, List<SetCard> setCards) {
         this.id = id;
         this.name = name;
+        this.setCards = setCards;
     }
 
-    public Deck(int id, String name, List<DeckCard> cards) {
-        this.id = id;
-        this.name = name;
-        this.cards = cards;
-    }
 
     public int getId() {
         return id;
@@ -52,12 +55,12 @@ public class Deck
         this.name = name;
     }
 
-    public List<DeckCard> getCards() {
-        return cards;
+    public List<SetCard> getSetCards() {
+        return setCards;
     }
 
-    public void setCards(List<DeckCard> cards) {
-        this.cards = cards;
+    public void setDeckCards(List<SetCard> setCards) {
+        this.setCards = setCards;
     }
 
     @Override
@@ -65,6 +68,7 @@ public class Deck
         return "Deck{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", deckCards=" + setCards +
                 '}';
     }
 }

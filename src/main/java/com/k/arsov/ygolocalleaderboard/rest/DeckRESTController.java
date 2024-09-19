@@ -1,14 +1,17 @@
 package com.k.arsov.ygolocalleaderboard.rest;
 
 import com.k.arsov.ygolocalleaderboard.entity.Deck;
+import com.k.arsov.ygolocalleaderboard.entity.SetCard;
 import com.k.arsov.ygolocalleaderboard.rest.response.ErrorResponse;
 import com.k.arsov.ygolocalleaderboard.rest.response.NotFoundException;
 import com.k.arsov.ygolocalleaderboard.service.CRUDService;
+import com.k.arsov.ygolocalleaderboard.service.ExternalYGOProService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -23,10 +26,15 @@ public class DeckRESTController
         deckService = theDeckService;
     }
 
+    @Autowired
+    private ExternalYGOProService setCardService;
+
 
     @GetMapping("/decks")
     public List<Deck> findAll()
     {
+
+
         return deckService.findAll();
     }
 
@@ -43,7 +51,33 @@ public class DeckRESTController
         return theDeck;
     }
 
+    @GetMapping("/decks/{deckId}/cards-details")
+    public List<SetCard> getDecksCardsDetails(@PathVariable int deckId)
+    {
+        Deck theDeck = deckService.findById(deckId);
+
+        if(theDeck == null)
+        {
+            throw new NotFoundException("Deck ID not found." + deckId);
+        }
+
+        //List<SetCardDetails> cardDetails = theDeck.returnCardsAsList().stream().map(s -> setCardService.fetchSetCard(s)).toList();
+
+        List<SetCard> cardDetails = new ArrayList<>();
+//        for (String cardCode : theDeck.returnCardsAsList())
+//        {
+//            SetCard cd = setCardService.fetchSetCard(cardCode);
+//
+//            System.out.println(cd);
+//
+//            cardDetails.add(cd);
+//        }
+
+        return cardDetails;
+    }
+
     @PostMapping("/decks")
+    @ResponseStatus(HttpStatus.CREATED)
     public Deck addDeck(@RequestBody Deck theDeck)
     {
         theDeck.setId(0);
@@ -74,17 +108,5 @@ public class DeckRESTController
         deckService.deleteById(deckId);
 
         return "Deleted deck with id - " + deckId;
-    }
-
-    @ExceptionHandler
-    public ResponseEntity<ErrorResponse> handleException(NotFoundException exc)
-    {
-        ErrorResponse error = new ErrorResponse();
-
-        error.setStatus(HttpStatus.NOT_FOUND.value());
-        error.setMessage(exc.getMessage());
-        error.setTimeStamp(System.currentTimeMillis());
-
-        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 }

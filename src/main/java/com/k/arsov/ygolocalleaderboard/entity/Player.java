@@ -3,7 +3,7 @@ package com.k.arsov.ygolocalleaderboard.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="Player")
+@Table(name="player")
 public class Player
 {
     @Id
