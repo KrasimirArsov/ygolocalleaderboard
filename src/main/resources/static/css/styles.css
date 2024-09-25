@@ -1,98 +1,217 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
+* {
     margin: 0;
     padding: 0;
-    color: #333;
+    box-sizing: border-box;
 }
 
-h1 {
-    background-color: #007bff;
-    color: white;
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #294C36; /* Dark green background */
+    color: #E1C4C2; /* Light pinkish text */
+}
+
+header {
+    background-color: #000; /* Black background */
     padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+header .logo h1 {
+    color: #E1C4C2;
+    font-size: 48px;
+    letter-spacing: 2px;
+}
+
+nav ul {
+    list-style-type: none;
+    margin-top: 20px;
+    padding: 10px 0;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 0 20px;
+}
+
+nav ul li a {
+    color: #E1C4C2;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 5px 10px;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom 0.3s ease;
+}
+
+nav ul li a:hover {
+    border-bottom: 2px solid #D4AF37; /* Dark Gold border on hover */
+}
+
+main {
+    padding: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.dashboard, .stats {
+    margin: 20px 0;
+    background-color: #E1C4C2; /* Light pinkish background */
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.dashboard h2, .stats h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #294C36; /* Dark green heading */
     text-align: center;
 }
 
-table {
+.duel-list .duel {
+    background-color: #000; /* Black duel cards */
+    border: 1px solid #D4AF37; /* Dark Gold border */
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    color: #E1C4C2;
+}
+
+.duel-list .duel span {
+    font-size: 18px;
+}
+
+.stats ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.stats ul li {
+    background-color: #000; /* Black stat cards */
+    border: 2px solid #D4AF37; /* Dark Gold border */
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    text-align: center;
+    color: #E1C4C2;
+}
+
+footer {
+    background-color: #000; /* Black footer */
+    color: #D4AF37; /* Dark Gold text */
+    text-align: center;
+    padding: 15px;
+    margin-top: 20px;
+    font-size: 14px;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Main content styling */
+main {
     width: 80%;
-    margin: 20px auto;
-    border-collapse: collapse;
-}
-
-table, th, td {
-    border: 1px solid #ddd;
-}
-
-th, td {
-    padding: 10px;
-    text-align: left;
-}
-
-th {
-    background-color: #007bff;
-    color: white;
-}
-
-td a {
-    color: #007bff;
-    text-decoration: none;
-}
-
-td a:hover {
-    text-decoration: underline;
-}
-
-form {
-    width: 60%;
     margin: 0 auto;
     padding: 20px;
-    background-color: white;
-    border: 1px solid #ddd;
+    background-color: #D4AF37; /* Dark Gold */
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #294C36;
 }
 
-label {
-    display: block;
-    margin-bottom: 8px;
+/* Heading styling */
+main h1 {
+    font-size: 2rem;
+    color: #294C36; /* Matches the darker green from the color scheme */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Button positioning and styling */
+main .btn {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background-color: #294C36;
+    color: #E1C4C2;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+main .btn:hover {
+    background-color: #000; /* Black hover */
+}
+
+/* Table styling */
+main table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+main table th, main table td {
+    padding: 15px;
+    border: 1px solid #294C36; /* Darker border to match color scheme */
+    text-align: center;
+}
+
+main table th {
+    background-color: #294C36;
+    color: #E1C4C2;
     font-weight: bold;
 }
 
-input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+main table tr:nth-child(even) {
+    background-color: #E1C4C2;
 }
 
-button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
+main table tr:hover {
+    background-color: #dfe7df; /* Light hover effect */
 }
 
-button:hover {
-    background-color: #0056b3;
-}
-
-a {
-    display: block;
-    text-align: center;
-    margin: 20px 0;
-    color: #007bff;
+.main-actions a {
+    margin: 0 5px;
+    padding: 8px 15px;
+    background-color: #294C36;
+    color: #E1C4C2;
     text-decoration: none;
+    border-radius: 5px;
 }
 
-a:hover {
-    text-decoration: underline;
+.main-actions a.btn-danger {
+    background-color: #b22222;
 }
 
-.container {
-    width: 80%;
-    margin: 0 auto;
+.main-actions a:hover {
+    background-color: #D4AF37; /* Dark gold hover */
 }
+
+.main-actions a.btn-danger:hover {
+    background-color: #a02020;
+}
+
+    .index-list-container {
+        display: flex;                     /* Use flexbox for layout */
+        justify-content: space-between;    /* Space between items */
+        align-items: center;               /* Vertically center items */
+        width: 100%;                       /* Optional: Full width */
+    }
+
+    .index-list-container a {
+        text-decoration: none;             /* Remove underline from links */
+        padding: 0 10px;                  /* Optional: Add some padding */
+    }
+
+    .index-list-container a:nth-child(1) {
+        margin-right: auto;                /* Pushes the first link to the left */
+    }
+
+    .index-list-container a:nth-child(2) {
+        text-align: center;                /* Center the second link */
+        margin: 0 auto;                   /* Auto margin for centering */
+    }
+
+    .index-list-container a:nth-child(n+3) {
+        margin-left: auto;                 /* Push the rest of the links to the right */
+    }

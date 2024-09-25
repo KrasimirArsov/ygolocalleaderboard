@@ -1,12 +1,9 @@
 package com.k.arsov.ygolocalleaderboard.rest;
 
 import com.k.arsov.ygolocalleaderboard.entity.Duel;
-import com.k.arsov.ygolocalleaderboard.rest.response.ErrorResponse;
-import com.k.arsov.ygolocalleaderboard.rest.response.NotFoundException;
+import com.k.arsov.ygolocalleaderboard.rest.exceptions.response.NotFoundException;
 import com.k.arsov.ygolocalleaderboard.service.CRUDService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

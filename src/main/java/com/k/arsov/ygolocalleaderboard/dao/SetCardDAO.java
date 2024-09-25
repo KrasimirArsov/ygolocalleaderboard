@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class SetCardDAO implements DAO<SetCard>
+public class SetCardDAO
 {
     private EntityManager entityManager;
 
@@ -19,7 +19,6 @@ public class SetCardDAO implements DAO<SetCard>
             entityManager = theEntityManager;
         }
 
-    @Override
     public List<SetCard> findAll() {
         //create query
         TypedQuery<SetCard> theQuery = entityManager.createQuery("from SetCard", SetCard.class);
@@ -31,21 +30,18 @@ public class SetCardDAO implements DAO<SetCard>
         return deckCards;
     }
 
-    @Override
     public SetCard findById(int theId) {
         SetCard theDeckCard = entityManager.find(SetCard.class, theId);
 
         return theDeckCard;
     }
 
-    @Override
     public SetCard save(SetCard theDeckCard) {
         SetCard dbDeckCard = entityManager.merge(theDeckCard);
 
         return dbDeckCard;
     }
 
-    @Override
     public void deleteById(int theId) {
         SetCard theDeckCard = entityManager.find(SetCard.class, theId);
 

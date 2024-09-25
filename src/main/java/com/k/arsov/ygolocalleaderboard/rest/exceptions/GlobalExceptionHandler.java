@@ -1,7 +1,7 @@
 package com.k.arsov.ygolocalleaderboard.rest.exceptions;
 
-import com.k.arsov.ygolocalleaderboard.rest.response.ErrorResponse;
-import com.k.arsov.ygolocalleaderboard.rest.response.NotFoundException;
+import com.k.arsov.ygolocalleaderboard.rest.exceptions.response.ErrorResponse;
+import com.k.arsov.ygolocalleaderboard.rest.exceptions.response.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

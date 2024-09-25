@@ -1,6 +1,6 @@
 package com.k.arsov.ygolocalleaderboard.service;
 
-import com.k.arsov.ygolocalleaderboard.dao.DAO;
+import com.k.arsov.ygolocalleaderboard.dao.DuelDAO;
 import com.k.arsov.ygolocalleaderboard.entity.Duel;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,12 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @org.springframework.stereotype.Service
-public class DuelServicе implements CRUDService<Duel>
+public class DuelService implements CRUDService<Duel>
 {
-    public DAO<Duel> duelDAO;
+    public DuelDAO duelDAO;
 
     @Autowired
-    public DuelServicе(DAO<Duel> theDuelDAO)
+    public DuelService(DuelDAO theDuelDAO)
     {
         duelDAO = theDuelDAO;
     }
@@ -38,5 +38,12 @@ public class DuelServicе implements CRUDService<Duel>
     @Override
     public void deleteById(int theId) {
         duelDAO.deleteById(theId);
+    }
+
+    public List<Duel> findAllMostRecent(int numMostRecent)
+    {
+        List<Duel> recentDuels = duelDAO.findAll();
+
+        return recentDuels.subList(0, Math.min(numMostRecent, recentDuels.size()));
     }
 }

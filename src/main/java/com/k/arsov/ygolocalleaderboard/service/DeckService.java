@@ -1,7 +1,8 @@
 package com.k.arsov.ygolocalleaderboard.service;
 
-import com.k.arsov.ygolocalleaderboard.dao.DAO;
+import com.k.arsov.ygolocalleaderboard.dao.DeckDAO;
 import com.k.arsov.ygolocalleaderboard.entity.Deck;
+import com.k.arsov.ygolocalleaderboard.entity.DeckWinLossDrawRatio;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -10,10 +11,10 @@ import java.util.List;
 @org.springframework.stereotype.Service
 public class DeckService implements CRUDService<Deck>
 {
-    public DAO<Deck> deckDAO;
+    public DeckDAO deckDAO;
 
     @Autowired
-    public DeckService(DAO<Deck> theDeckDAO)
+    public DeckService(DeckDAO theDeckDAO)
     {
         deckDAO = theDeckDAO;
     }
@@ -39,4 +40,19 @@ public class DeckService implements CRUDService<Deck>
     public void deleteById(int theId) {
         deckDAO.deleteById(theId);
     }
+
+    public List<DeckWinLossDrawRatio> findAllDeckWinLossDrawRatio() {
+        return deckDAO.findAllWinLossDrawRatio();
+    }
+
+    public DeckWinLossDrawRatio findByIdIdWinLossDrawRatio(int theId) {
+        return deckDAO.findByIdWinLossDrawRatio(theId);
+    }
+
+    public List<DeckWinLossDrawRatio> findTopDeckWinLossDrawRatio(int numOfTopDeckWinLossDrawRatios) {
+        List<DeckWinLossDrawRatio> returnList = deckDAO.findAllWinLossDrawRatio();
+
+        return returnList.subList(0, Math.min(numOfTopDeckWinLossDrawRatios, returnList.size()));
+    }
+
 }

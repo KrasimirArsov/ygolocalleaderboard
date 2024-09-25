@@ -1,7 +1,9 @@
 package com.k.arsov.ygolocalleaderboard.service;
 
-import com.k.arsov.ygolocalleaderboard.dao.DAO;
+import com.k.arsov.ygolocalleaderboard.dao.PlayerDAO;
+import com.k.arsov.ygolocalleaderboard.entity.DeckWinLossDrawRatio;
 import com.k.arsov.ygolocalleaderboard.entity.Player;
+import com.k.arsov.ygolocalleaderboard.entity.PlayerWinLossDrawRatio;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -10,10 +12,10 @@ import java.util.List;
 @org.springframework.stereotype.Service
 public class PlayerService implements CRUDService<Player>
 {
-    public DAO<Player> playerDAO;
+    public PlayerDAO playerDAO;
 
     @Autowired
-    public PlayerService(DAO<Player> thePlayerDAO)
+    public PlayerService(PlayerDAO thePlayerDAO)
     {
         playerDAO = thePlayerDAO;
     }
@@ -38,5 +40,19 @@ public class PlayerService implements CRUDService<Player>
     @Override
     public void deleteById(int theId) {
         playerDAO.deleteById(theId);
+    }
+
+    public List<PlayerWinLossDrawRatio> findAllPlayerWinLossDrawRatio() {
+        return playerDAO.findAllWinLossDrawRatio();
+    }
+
+    public PlayerWinLossDrawRatio findByIdIdWinLossDrawRatio(int theId) {
+        return playerDAO.findByIdWinLossDrawRatio(theId);
+    }
+
+    public List<PlayerWinLossDrawRatio> findTopPlayerWinLossDrawRatio(int numOfTopPlayersWinLossDrawRatios) {
+        List<PlayerWinLossDrawRatio> returnList = playerDAO.findAllWinLossDrawRatio();
+
+        return returnList.subList(0, Math.min(numOfTopPlayersWinLossDrawRatios, returnList.size()));
     }
 }

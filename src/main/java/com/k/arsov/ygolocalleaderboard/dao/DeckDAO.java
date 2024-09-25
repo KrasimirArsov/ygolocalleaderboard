@@ -1,6 +1,7 @@
 package com.k.arsov.ygolocalleaderboard.dao;
 
 import com.k.arsov.ygolocalleaderboard.entity.Deck;
+import com.k.arsov.ygolocalleaderboard.entity.DeckWinLossDrawRatio;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class DeckDAO implements DAO<Deck>
+public class DeckDAO
 {
     private EntityManager entityManager;
 
@@ -19,7 +20,6 @@ public class DeckDAO implements DAO<Deck>
             entityManager = theEntityManager;
         }
 
-    @Override
     public List<Deck> findAll() {
         //create query
         TypedQuery<Deck> theQuery = entityManager.createQuery("from Deck", Deck.class);
@@ -31,24 +31,38 @@ public class DeckDAO implements DAO<Deck>
         return decks;
     }
 
-    @Override
     public Deck findById(int theId) {
         Deck theDeck = entityManager.find(Deck.class, theId);
 
         return theDeck;
     }
 
-    @Override
     public Deck save(Deck theDeck) {
         Deck dbDeck = entityManager.merge(theDeck);
 
         return dbDeck;
     }
 
-    @Override
     public void deleteById(int theId) {
         Deck theDeck = entityManager.find(Deck.class, theId);
 
         entityManager.remove(theDeck);
+    }
+
+    public List<DeckWinLossDrawRatio> findAllWinLossDrawRatio() {
+        //create query
+        TypedQuery<DeckWinLossDrawRatio> theQuery = entityManager.createQuery("from DeckWinLossDrawRatio d ORDER BY d.winRatio DESC", DeckWinLossDrawRatio.class);
+
+        //execute query
+        List<DeckWinLossDrawRatio> decksWLDRatios = theQuery.getResultList();
+
+        //return
+        return decksWLDRatios;
+    }
+
+    public DeckWinLossDrawRatio findByIdWinLossDrawRatio(int theId) {
+        DeckWinLossDrawRatio theDecksWLDRatio = entityManager.find(DeckWinLossDrawRatio.class, theId);
+
+        return theDecksWLDRatio;
     }
 }

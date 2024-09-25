@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>YGOLocalLeaderboard</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+</head>
+<body>
+<header>
+    <div class="logo">
+        <h1>YGOLocalLeaderboard</h1>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/players">Players</a></li>
+            <li><a href="/decks">Decks</a></li>
+            <li><a href="/duels">Duels</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section class="stats">
+        <h2>Top Decks</h2>
+        <ul>
+            <li class="index-list-container">
+                <a th:text="${deckWLDRatios[0].deckName} + ' '"></a>
+                <a th:text="${deckWLDRatios[0].totalDuels} + ' total duels  '"></a>
+                <a th:text="${deckWLDRatios[0].winRatio*100} + ' WR  '"></a>
+                <a th:text="${deckWLDRatios[0].lossRatio*100} + ' LR  '"></a>
+                <a th:text="${deckWLDRatios[0].drawRatio*100} + ' DR'"></a>
+            </li>
+            <li class="index-list-container">
+                <a th:text="${deckWLDRatios[1].deckName} + ' '"></a>
+                <a th:text="${deckWLDRatios[1].totalDuels} + ' total duels  '"></a>
+                <a th:text="${deckWLDRatios[1].winRatio*100} + ' WR  '"></a>
+                <a th:text="${deckWLDRatios[1].lossRatio*100} + ' LR  '"></a>
+                <a th:text="${deckWLDRatios[1].drawRatio*100} + ' DR'"></a>
+            </li>
+            <li class="index-list-container">
+                <a th:text="${deckWLDRatios[2].deckName} + ' '"></a>
+                <a th:text="${deckWLDRatios[2].totalDuels} + ' total duels  '"></a>
+                <a th:text="${deckWLDRatios[2].winRatio*100} + ' WR  '"></a>
+                <a th:text="${deckWLDRatios[2].lossRatio*100} + ' LR  '"></a>
+                <a th:text="${deckWLDRatios[2].drawRatio*100} + ' DR'"></a>
+            </li>
+        </ul>
+    </section>
+    <section class="stats">
+        <h2>Top Players</h2>
+        <ul>
+            <li class="index-list-container">
+                <a th:text="${playerWLDRatios[0].playerName} + ' '"></a>
+                <a th:text="${playerWLDRatios[0].totalDuels} + ' total duels  '"></a>
+                <a th:text="${playerWLDRatios[0].winRatio*100} + ' WR  '"></a>
+                <a th:text="${playerWLDRatios[0].lossRatio*100} + ' LR  '"></a>
+                <a th:text="${playerWLDRatios[0].drawRatio*100} + ' DR'"></a>
+            </li>
+            <li class="index-list-container">
+                <a th:text="${playerWLDRatios[1].playerName} + ' '"></a>
+                <a th:text="${playerWLDRatios[1].totalDuels} + ' total duels  '"></a>
+                <a th:text="${playerWLDRatios[1].winRatio*100} + ' WR  '"></a>
+                <a th:text="${playerWLDRatios[1].lossRatio*100} + ' LR  '"></a>
+                <a th:text="${playerWLDRatios[1].drawRatio*100} + ' DR'"></a>
+            </li>
+            <li class="index-list-container">
+                <a th:text="${playerWLDRatios[2].playerName} + ' '"></a>
+                <a th:text="${playerWLDRatios[2].totalDuels} + ' total duels  '"></a>
+                <a th:text="${playerWLDRatios[2].winRatio*100} + ' WR  '"></a>
+                <a th:text="${playerWLDRatios[2].lossRatio*100} + ' LR  '"></a>
+                <a th:text="${playerWLDRatios[2].drawRatio*100} + ' DR'"></a>
+            </li>
+        </ul>
+    </section>
+    <section class="dashboard">
+        <h2>Recent Duels</h2>
+        <div class="duel-list">
+            <div class="duel">
+                <span>Player One (Deck One) vs Player Two (Deck Two)</span>
+                <span>Result: Player One Wins by LP Depletion</span>
+            </div>
+            <div class="duel">
+                <span>Player Three (Deck Three) vs Player Four (Deck Four)</span>
+                <span>Result: Player Four Wins by Deck Out</span>
+            </div>
+            <div class="duel">
+                <span>Player Three (Deck Three) vs Player Four (Deck Four)</span>
+                <span>Result: Player Four Wins by Deck Out</span>
+            </div>
+            <div class="duel">
+                <span>Player Three (Deck Three) vs Player Four (Deck Four)</span>
+                <span>Result: Player Four Wins by Deck Out</span>
+            </div>
+            <div class="duel">
+                <span>Player Three (Deck Three) vs Player Four (Deck Four)</span>
+                <span>Result: Player Four Wins by Deck Out</span>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2024 YGOLocalLeaderboard</p>
+</footer>
+</body>
+</html>

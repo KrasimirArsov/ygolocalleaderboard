@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class DuelDAO implements DAO<Duel>
+public class DuelDAO
 {
     private EntityManager entityManager;
 
@@ -19,10 +19,9 @@ public class DuelDAO implements DAO<Duel>
             entityManager = theEntityManager;
         }
 
-    @Override
     public List<Duel> findAll() {
         //create query
-        TypedQuery<Duel> theQuery = entityManager.createQuery("from Duel", Duel.class);
+        TypedQuery<Duel> theQuery = entityManager.createQuery("from Duel d ORDER BY d.duelDate DESC", Duel.class);
 
         //execute query
         List<Duel> duels = theQuery.getResultList();
@@ -31,21 +30,18 @@ public class DuelDAO implements DAO<Duel>
         return duels;
     }
 
-    @Override
     public Duel findById(int theId) {
         Duel theDuel = entityManager.find(Duel.class, theId);
 
         return theDuel;
     }
 
-    @Override
     public Duel save(Duel theDuel) {
         Duel dbDuel = entityManager.merge(theDuel);
 
         return dbDuel;
     }
 
-    @Override
     public void deleteById(int theId) {
         Duel theDuel = entityManager.find(Duel.class, theId);
 

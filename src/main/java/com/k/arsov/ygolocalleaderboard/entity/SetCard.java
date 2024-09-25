@@ -1,11 +1,14 @@
 package com.k.arsov.ygolocalleaderboard.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.util.List;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
 @Table(name="set_card")
 public class SetCard
@@ -29,15 +32,6 @@ public class SetCard
     @Column(name="set_price")
     @JsonProperty("set_price")
     private double setPrice;
-
-    @JsonBackReference
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "deck_set_card",
-            joinColumns = @JoinColumn(name = "set_card_id"),
-            inverseJoinColumns = @JoinColumn(name = "deck_id")
-    )
-    private List<Deck> decks;
 
     public SetCard()
     {
@@ -90,14 +84,6 @@ public class SetCard
 
     public void setSetPrice(double setPrice) {
         this.setPrice = setPrice;
-    }
-
-    public List<Deck> getDecks() {
-        return decks;
-    }
-
-    public void setDecks(List<Deck> decks) {
-        this.decks = decks;
     }
 
     @Override

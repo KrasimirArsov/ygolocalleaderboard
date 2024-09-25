@@ -65,10 +65,13 @@ public class SecurityConfig
                         .requestMatchers(HttpMethod.POST, "/api/set-cards").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/api/set-cards").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/set-cards/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/set-cards-fetch-and-save-from-external-source").hasRole("ADMIN")
 
                         .requestMatchers(HttpMethod.GET, "/decks").hasRole("PLAYER")
                         .requestMatchers(HttpMethod.GET, "/decks/**").hasRole("PLAYER")
                         .requestMatchers(HttpMethod.POST, "/decks").hasRole("ADMIN")
+
+                        .requestMatchers(HttpMethod.GET, "/**").hasRole("ADMIN")
 
                         .requestMatchers(HttpMethod.GET, "/css/styles.css").hasRole("PLAYER")
         );

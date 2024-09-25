@@ -1,29 +1,54 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All Decks</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
 </head>
 <body>
-<h1>Decks</h1>
-<table>
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="deck : ${decks}">
-        <td th:text="${deck.id}"></td>
-        <td th:text="${deck.name}"></td>
-        <td>
-            <a th:href="@{/decks/{id}(id=${deck.id})}">View</a>
-        </td>
-    </tr>
-    </tbody>
-</table>
-<a href="/decks/new">Create New Deck</a>
+<header>
+    <div class="logo">
+        <h1>YGOLocalLeaderboard</h1>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/players">Players</a></li>
+            <li><a href="/decks">Decks</a></li>
+            <li><a href="/duels">Duels</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <h1>Decks</h1>
+    <a href="/decks/new" class="btn">Create New Deck</a>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="deck : ${decks}">
+            <td th:text="${deck.id}"></td>
+            <td th:text="${deck.name}"></td>
+            <td>
+                <a th:href="@{/decks/{id}(id=${deck.id})}" class="btn">View</a>
+                <a th:href="@{/decks/edit/{id}(id=${deck.id})}" class="btn">Edit</a>
+                <a th:href="@{/decks/delete/{id}(id=${deck.id})}" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+
+<footer>
+    <p>&copy; 2024 YGOLocalLeaderboard</p>
+</footer>
 </body>
 </html>

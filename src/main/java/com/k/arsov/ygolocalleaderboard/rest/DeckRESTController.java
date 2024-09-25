@@ -2,13 +2,11 @@ package com.k.arsov.ygolocalleaderboard.rest;
 
 import com.k.arsov.ygolocalleaderboard.entity.Deck;
 import com.k.arsov.ygolocalleaderboard.entity.SetCard;
-import com.k.arsov.ygolocalleaderboard.rest.response.ErrorResponse;
-import com.k.arsov.ygolocalleaderboard.rest.response.NotFoundException;
+import com.k.arsov.ygolocalleaderboard.rest.exceptions.response.NotFoundException;
 import com.k.arsov.ygolocalleaderboard.service.CRUDService;
 import com.k.arsov.ygolocalleaderboard.service.ExternalYGOProService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -61,17 +59,7 @@ public class DeckRESTController
             throw new NotFoundException("Deck ID not found." + deckId);
         }
 
-        //List<SetCardDetails> cardDetails = theDeck.returnCardsAsList().stream().map(s -> setCardService.fetchSetCard(s)).toList();
-
         List<SetCard> cardDetails = new ArrayList<>();
-//        for (String cardCode : theDeck.returnCardsAsList())
-//        {
-//            SetCard cd = setCardService.fetchSetCard(cardCode);
-//
-//            System.out.println(cd);
-//
-//            cardDetails.add(cd);
-//        }
 
         return cardDetails;
     }
@@ -96,7 +84,8 @@ public class DeckRESTController
     }
 
     @DeleteMapping("/decks/{deckId}")
-    public String deleteDeck(@PathVariable int deckId)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteDeck(@PathVariable int deckId)
     {
         Deck tempDeck = deckService.findById(deckId);
 
@@ -107,6 +96,5 @@ public class DeckRESTController
 
         deckService.deleteById(deckId);
 
-        return "Deleted deck with id - " + deckId;
     }
 }

@@ -1,15 +1,12 @@
 package com.k.arsov.ygolocalleaderboard.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
 
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
 @Table(name="deck")
-public class Deck
-{
+public class Deck {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
@@ -18,8 +15,7 @@ public class Deck
     @Column(name="name")
     private String name;
 
-    @JsonManagedReference
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     @JoinTable(
             name = "deck_set_card",
             joinColumns = @JoinColumn(name = "deck_id"),

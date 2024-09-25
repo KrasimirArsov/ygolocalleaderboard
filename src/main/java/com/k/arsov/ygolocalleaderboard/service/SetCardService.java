@@ -1,6 +1,6 @@
 package com.k.arsov.ygolocalleaderboard.service;
 
-import com.k.arsov.ygolocalleaderboard.dao.DAO;
+import com.k.arsov.ygolocalleaderboard.dao.SetCardDAO;
 import com.k.arsov.ygolocalleaderboard.entity.SetCard;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,33 +10,33 @@ import java.util.List;
 @org.springframework.stereotype.Service
 public class SetCardService implements CRUDService<SetCard>
 {
-    public DAO<SetCard> deckCardDAO;
+    public SetCardDAO setCardDAO;
 
     @Autowired
-    public SetCardService(DAO<SetCard> theDeckCardDAO)
+    public SetCardService(SetCardDAO theSetCardDAO)
     {
-        deckCardDAO = theDeckCardDAO;
+        setCardDAO = theSetCardDAO;
     }
 
     @Override
     public List<SetCard> findAll() {
-        return deckCardDAO.findAll();
+        return setCardDAO.findAll();
     }
 
     @Override
     public SetCard findById(int theId) {
-        return deckCardDAO.findById(theId);
+        return setCardDAO.findById(theId);
     }
 
     @Transactional
     @Override
-    public SetCard save(SetCard theDeckCard) {
-        return deckCardDAO.save(theDeckCard);
+    public SetCard save(SetCard theSetCard) {
+        return setCardDAO.save(theSetCard);
     }
 
     @Transactional
     @Override
     public void deleteById(int theId) {
-        deckCardDAO.deleteById(theId);
+        setCardDAO.deleteById(theId);
     }
 }
