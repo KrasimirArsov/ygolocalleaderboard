@@ -40,7 +40,7 @@ public class DuelService implements CRUDService<Duel>
         duelDAO.deleteById(theId);
     }
 
-    public List<Duel> findAllMostRecent(int numMostRecent)
+    public List<Duel> findMostRecent(int numMostRecent)
     {
         List<Duel> recentDuels = duelDAO.findAll();
 

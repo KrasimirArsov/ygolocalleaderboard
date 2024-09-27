@@ -1,12 +1,17 @@
 package com.k.arsov.ygolocalleaderboard.service;
 
 import com.k.arsov.ygolocalleaderboard.dao.DeckDAO;
+import com.k.arsov.ygolocalleaderboard.dto.DeckDTO;
 import com.k.arsov.ygolocalleaderboard.entity.Deck;
-import com.k.arsov.ygolocalleaderboard.entity.DeckWinLossDrawRatio;
+import com.k.arsov.ygolocalleaderboard.entity.Player;
+import com.k.arsov.ygolocalleaderboard.entity.sqlviewentities.DeckWinLossDrawRatio;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @org.springframework.stereotype.Service
 public class DeckService implements CRUDService<Deck>
@@ -55,4 +60,29 @@ public class DeckService implements CRUDService<Deck>
         return returnList.subList(0, Math.min(numOfTopDeckWinLossDrawRatios, returnList.size()));
     }
 
+    public DeckDTO getDeckDTOById(int theId)
+    {
+        DeckDTO deckDTO = new DeckDTO();
+        deckDTO.setDeck(deckDAO.findById(theId));
+        deckDTO.setDeckWinLossDrawRatio(deckDAO.findByIdWinLossDrawRatio(theId));
+        deckDTO.setPlayerDeckWinRates(deckDAO.findAllPlayerDeckWinRateByDeckId(theId));
+
+        return deckDTO;
+    }
+
+    public DeckDTO getDeckDTOByName(String theName)
+    {
+        DeckDTO deckDTO = new DeckDTO();
+        deckDTO.setDeck(deckDAO.findByName(theName));
+        deckDTO.setDeckWinLossDrawRatio(deckDAO.findByIdWinLossDrawRatio(deckDTO.getDeck().getId()));
+        deckDTO.setPlayerDeckWinRates(deckDAO.findAllPlayerDeckWinRateByDeckId(deckDTO.getDeck().getId()));
+
+        return deckDTO;
+    }
+
+    public Map<Integer, Deck> getAllDecksAsMap()
+    {
+        return findAll().stream()
+                .collect(Collectors.toMap(Deck::getId, deck -> deck));
+    }
 }

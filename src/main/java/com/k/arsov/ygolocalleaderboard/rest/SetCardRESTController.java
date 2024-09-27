@@ -41,7 +41,7 @@ public class SetCardRESTController
     @GetMapping("/set-cards-fetch-and-save-from-external-source")
     public String fetchAndSaveExternal() throws FileNotFoundException
     {
-        Scanner scan = new Scanner(new BufferedReader(new FileReader(new File("E:\\Dev\\git2\\ygolocalleaderboard\\src\\main\\resources\\manual\\allEnCards.txt"))));
+        Scanner scan = new Scanner(new BufferedReader(new FileReader(new File("E:\\Dev\\git2\\ygolocalleaderboard\\src\\main\\resources\\manual\\set_codes.txt"))));
         while(scan.hasNextLine())
         {
             try

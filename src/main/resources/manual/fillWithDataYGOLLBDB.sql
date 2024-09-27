@@ -51,6 +51,6 @@ INSERT INTO deck_set_card (deck_id, set_card_id) VALUES (5, 'PGD-004'); -- Marik
 
 INSERT INTO duel (player_one_id, deck_one_id, player_two_id, deck_two_id, result, win_condition)
 VALUES
-(1, 1, 2, 2, 1, 'Exodia'),  -- Yugi defeats Kaiba with Exodia
-(3, 3, 4, 4, 2, 'LP_Depletion'),  -- Mai defeats Joey by LP Depletion
-(5, 5, 1, 1, 1, 'Destiny_Board');  -- Marik defeats Yugi with Destiny Board
+(1, 1, 2, 2, 1, 'Exodia'),
+(3, 3, 4, 4, 2, 'LP_Depletion'),
+(5, 5, 1, 1, 1, 'Destiny_Board');

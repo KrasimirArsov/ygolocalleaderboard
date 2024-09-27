@@ -35,7 +35,6 @@ public class CopySetCardService
             System.out.println(cardSet.getSetPrice());
             System.out.println(cardSet.getSetRarity());
             System.out.println(cardSet.getSetName());
-            System.out.println(cardSet.getName());
             System.out.println(cardSet);
 
             cardSetRepository.save(cardSet);

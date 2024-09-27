@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Decks</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+</head>
+<body>
+<header>
+    <div class="logo">
+        <h1>YGOLocalLeaderboard</h1>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/players">Players</a></li>
+            <li><a href="/decks">Decks</a></li>
+            <li><a href="/duels">Duels</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <h1>Duels</h1>
+    <a href="/duels/new" class="btn">Add a new Duel</a>
+
+    <table>
+        <thead>
+        <tr>
+            <th>First Player</th>
+            <th>First Deck</th>
+            <th>Second Player</th>
+            <th>Second Deck</th>
+            <th>Result</th>
+            <th>Win Condition</th>
+            <th>Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="duel : ${duels}">
+            <td th:text="${duel.player1.name}"></td>
+            <td th:text="${duel.deck1.name}"></td>
+            <td th:text="${duel.player2.name}"></td>
+            <td th:text="${duel.deck2.name}"></td>
+            <td th:text="${duel.result}"></td>
+            <td th:text="${duel.winCondition}"></td>
+            <td th:text="${duel.dateDate}"></td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+
+<footer>
+    <p>&copy; 2024 YGOLocalLeaderboard</p>
+</footer>
+</body>
+</html>

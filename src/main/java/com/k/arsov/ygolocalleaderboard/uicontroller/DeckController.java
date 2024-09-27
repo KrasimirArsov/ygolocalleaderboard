@@ -1,7 +1,9 @@
 package com.k.arsov.ygolocalleaderboard.uicontroller;
 
+import com.k.arsov.ygolocalleaderboard.dto.DeckDTO;
 import com.k.arsov.ygolocalleaderboard.entity.Deck;
 import com.k.arsov.ygolocalleaderboard.service.DeckService;
+import com.k.arsov.ygolocalleaderboard.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,19 +18,36 @@ public class DeckController {
     @Autowired
     private DeckService deckService;
 
+    @Autowired
+    private PlayerService playerService;
+
     // Display all decks
     @GetMapping("/decks")
     public String listDecks(Model model) {
         List<Deck> decks = deckService.findAll();
         model.addAttribute("decks", decks);
+
         return "decks/list"; // Returns the decks list view
     }
 
     // Display a single deck by ID
-    @GetMapping("/decks/{id}")
-    public String viewDeck(@PathVariable("id") int id, Model model) {
-        Deck deck = deckService.findById(id);
-        model.addAttribute("deck", deck);
+//    @GetMapping("/decks/{id}")
+//    public String viewDeck(@PathVariable("id") int id, Model model) {
+//        DeckDTO deckDTO = deckService.getDeckDTOById(id);
+//        model.addAttribute("deckDTO", deckDTO);
+//
+//        model.addAttribute("playersMap", playerService.getAllPlayersAsMap());
+//
+//        return "decks/view"; // Returns the single deck view
+//    }
+
+    @GetMapping("/decks/{name}")
+    public String viewDeckByName(@PathVariable("name") String name, Model model) {
+        DeckDTO deckDTO = deckService.getDeckDTOByName(name);
+        model.addAttribute("deckDTO", deckDTO);
+
+        model.addAttribute("playersMap", playerService.getAllPlayersAsMap());
+
         return "decks/view"; // Returns the single deck view
     }
 

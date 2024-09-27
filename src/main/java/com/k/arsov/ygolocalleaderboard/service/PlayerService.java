@@ -1,13 +1,16 @@
 package com.k.arsov.ygolocalleaderboard.service;
 
 import com.k.arsov.ygolocalleaderboard.dao.PlayerDAO;
-import com.k.arsov.ygolocalleaderboard.entity.DeckWinLossDrawRatio;
+import com.k.arsov.ygolocalleaderboard.dto.DeckDTO;
+import com.k.arsov.ygolocalleaderboard.dto.PlayerDTO;
 import com.k.arsov.ygolocalleaderboard.entity.Player;
-import com.k.arsov.ygolocalleaderboard.entity.PlayerWinLossDrawRatio;
+import com.k.arsov.ygolocalleaderboard.entity.sqlviewentities.PlayerWinLossDrawRatio;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @org.springframework.stereotype.Service
 public class PlayerService implements CRUDService<Player>
@@ -54,5 +57,31 @@ public class PlayerService implements CRUDService<Player>
         List<PlayerWinLossDrawRatio> returnList = playerDAO.findAllWinLossDrawRatio();
 
         return returnList.subList(0, Math.min(numOfTopPlayersWinLossDrawRatios, returnList.size()));
+    }
+
+    public PlayerDTO getPlayerDTOById(int theId)
+    {
+        PlayerDTO playerDTO = new PlayerDTO();
+        playerDTO.setPlayer(playerDAO.findById(theId));
+        playerDTO.setPlayerWinLossDrawRatio(playerDAO.findByIdWinLossDrawRatio(theId));
+        playerDTO.setPlayerDeckWinRates(playerDAO.findAllPlayerDeckWinRateByPlayerId(theId));
+
+        return playerDTO;
+    }
+
+    public PlayerDTO getPlayerDTOByName(String theName)
+    {
+        PlayerDTO playerDTO = new PlayerDTO();
+        playerDTO.setPlayer(playerDAO.findByName(theName));
+        playerDTO.setPlayerWinLossDrawRatio(playerDAO.findByIdWinLossDrawRatio(playerDTO.getPlayer().getId()));
+        playerDTO.setPlayerDeckWinRates(playerDAO.findAllPlayerDeckWinRateByPlayerId(playerDTO.getPlayer().getId()));
+
+        return playerDTO;
+    }
+
+    public Map<Integer,Player> getAllPlayersAsMap()
+    {
+        return findAll().stream()
+                .collect(Collectors.toMap(Player::getId, player -> player));
     }
 }

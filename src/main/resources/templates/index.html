@@ -32,6 +32,11 @@
                 <a th:text="${deckWLDRatios[0].winRatio*100} + ' WR  '"></a>
                 <a th:text="${deckWLDRatios[0].lossRatio*100} + ' LR  '"></a>
                 <a th:text="${deckWLDRatios[0].drawRatio*100} + ' DR'"></a>
+                <div class="graph">
+                    <div class="win" th:style="'width: ' + ${deckWLDRatios[0].winRatio*100} + '%;'"></div> <!-- Win Rate -->
+                    <div class="loss" th:style="'width: ' + ${deckWLDRatios[0].lossRatio*100} + '%; left: ' + ${deckWLDRatios[0].winRatio*100} + '%;'"></div> <!-- Loss Rate -->
+                    <div class="draw" th:style="'width: ' + ${deckWLDRatios[0].drawRatio*100} + '%; left: ' + (${deckWLDRatios[0].winRatio*100} + ${deckWLDRatios[0].lossRatio*100}) + '%;'"></div> <!-- Draw Rate -->
+                </div>
             </li>
             <li class="index-list-container">
                 <a th:text="${deckWLDRatios[1].deckName} + ' '"></a>
@@ -39,6 +44,11 @@
                 <a th:text="${deckWLDRatios[1].winRatio*100} + ' WR  '"></a>
                 <a th:text="${deckWLDRatios[1].lossRatio*100} + ' LR  '"></a>
                 <a th:text="${deckWLDRatios[1].drawRatio*100} + ' DR'"></a>
+                <div class="graph">
+                    <div class="win" th:style="'width: ' + ${deckWLDRatios[1].winRatio*100} + '%;'"></div> <!-- Win Rate -->
+                    <div class="loss" th:style="'width: ' + ${deckWLDRatios[1].lossRatio*100} + '%; left: ' + ${deckWLDRatios[1].winRatio*100} + '%;'"></div> <!-- Loss Rate -->
+                    <div class="draw" th:style="'width: ' + ${deckWLDRatios[1].drawRatio*100} + '%; left: ' + (${deckWLDRatios[1].winRatio*100} + ${deckWLDRatios[1].lossRatio*100}) + '%;'"></div> <!-- Draw Rate -->
+                </div>
             </li>
             <li class="index-list-container">
                 <a th:text="${deckWLDRatios[2].deckName} + ' '"></a>
@@ -46,6 +56,11 @@
                 <a th:text="${deckWLDRatios[2].winRatio*100} + ' WR  '"></a>
                 <a th:text="${deckWLDRatios[2].lossRatio*100} + ' LR  '"></a>
                 <a th:text="${deckWLDRatios[2].drawRatio*100} + ' DR'"></a>
+                <div class="graph">
+                    <div class="win" th:style="'width: ' + ${deckWLDRatios[2].winRatio*100} + '%;'"></div> <!-- Win Rate -->
+                    <div class="loss" th:style="'width: ' + ${deckWLDRatios[2].lossRatio*100} + '%; left: ' + ${deckWLDRatios[2].winRatio*100} + '%;'"></div> <!-- Loss Rate -->
+                    <div class="draw" th:style="'width: ' + ${deckWLDRatios[2].drawRatio*100} + '%; left: ' + (${deckWLDRatios[2].winRatio*100} + ${deckWLDRatios[2].lossRatio*100}) + '%;'"></div> <!-- Draw Rate -->
+                </div>
             </li>
         </ul>
     </section>
@@ -58,6 +73,11 @@
                 <a th:text="${playerWLDRatios[0].winRatio*100} + ' WR  '"></a>
                 <a th:text="${playerWLDRatios[0].lossRatio*100} + ' LR  '"></a>
                 <a th:text="${playerWLDRatios[0].drawRatio*100} + ' DR'"></a>
+                <div class="graph">
+                    <div class="win" th:style="'width: ' + ${playerWLDRatios[0].winRatio*100} + '%;'"></div> <!-- Win Rate -->
+                    <div class="loss" th:style="'width: ' + ${playerWLDRatios[0].lossRatio*100} + '%; left: ' + ${playerWLDRatios[0].winRatio*100} + '%;'"></div> <!-- Loss Rate -->
+                    <div class="draw" th:style="'width: ' + ${playerWLDRatios[0].drawRatio*100} + '%; left: ' + (${playerWLDRatios[0].winRatio*100} + ${playerWLDRatios[0].lossRatio*100}) + '%;'"></div> <!-- Draw Rate -->
+                </div>
             </li>
             <li class="index-list-container">
                 <a th:text="${playerWLDRatios[1].playerName} + ' '"></a>
@@ -65,6 +85,11 @@
                 <a th:text="${playerWLDRatios[1].winRatio*100} + ' WR  '"></a>
                 <a th:text="${playerWLDRatios[1].lossRatio*100} + ' LR  '"></a>
                 <a th:text="${playerWLDRatios[1].drawRatio*100} + ' DR'"></a>
+                <div class="graph">
+                    <div class="win" th:style="'width: ' + ${playerWLDRatios[1].winRatio*100} + '%;'"></div> <!-- Win Rate -->
+                    <div class="loss" th:style="'width: ' + ${playerWLDRatios[1].lossRatio*100} + '%; left: ' + ${playerWLDRatios[1].winRatio*100} + '%;'"></div> <!-- Loss Rate -->
+                    <div class="draw" th:style="'width: ' + ${playerWLDRatios[1].drawRatio*100} + '%; left: ' + (${playerWLDRatios[1].winRatio*100} + ${playerWLDRatios[1].lossRatio*100}) + '%;'"></div> <!-- Draw Rate -->
+                </div>
             </li>
             <li class="index-list-container">
                 <a th:text="${playerWLDRatios[2].playerName} + ' '"></a>
@@ -72,31 +97,46 @@
                 <a th:text="${playerWLDRatios[2].winRatio*100} + ' WR  '"></a>
                 <a th:text="${playerWLDRatios[2].lossRatio*100} + ' LR  '"></a>
                 <a th:text="${playerWLDRatios[2].drawRatio*100} + ' DR'"></a>
+                <div class="graph">
+                    <div class="win" th:style="'width: ' + ${playerWLDRatios[2].winRatio*100} + '%;'"></div> <!-- Win Rate -->
+                    <div class="loss" th:style="'width: ' + ${playerWLDRatios[2].lossRatio*100} + '%; left: ' + ${playerWLDRatios[2].winRatio*100} + '%;'"></div> <!-- Loss Rate -->
+                    <div class="draw" th:style="'width: ' + ${playerWLDRatios[2].drawRatio*100} + '%; left: ' + (${playerWLDRatios[2].winRatio*100} + ${playerWLDRatios[2].lossRatio*100}) + '%;'"></div> <!-- Draw Rate -->
+                </div>
             </li>
         </ul>
     </section>
-    <section class="dashboard">
+    <section class="stats">
         <h2>Recent Duels</h2>
         <div class="duel-list">
             <div class="duel">
-                <span>Player One (Deck One) vs Player Two (Deck Two)</span>
-                <span>Result: Player One Wins by LP Depletion</span>
+                <span th:text="${recentDuels[0].player1.name} + ' (' + ${recentDuels[0].deck1.name} + ') ' + ' VS ' + ${recentDuels[0].player2.name} + ' (' + ${recentDuels[0].deck2.name} + ') '"></span>
+                <span th:if="${recentDuels[0].result == 1}" th:text="'Result: ' + ${recentDuels[0].player1.name} + ' won by ' + ${recentDuels[0].winCondition}"></span>
+                <span th:if="${recentDuels[0].result == 2}" th:text="'Result: ' + ${recentDuels[0].player2.name} + ' won by ' + ${recentDuels[0].winCondition}"></span>
+                <span th:if="${recentDuels[0].result == 0}" th:text="'Result: Draw by ' + ${recentDuels[0].winCondition}"></span>
             </div>
             <div class="duel">
-                <span>Player Three (Deck Three) vs Player Four (Deck Four)</span>
-                <span>Result: Player Four Wins by Deck Out</span>
+                <span th:text="${recentDuels[1].player1.name} + ' (' + ${recentDuels[1].deck1.name} + ') ' + ' VS ' + ${recentDuels[1].player2.name} + ' (' + ${recentDuels[1].deck2.name} + ') '"></span>
+                <span th:if="${recentDuels[1].result == 1}" th:text="'Result: ' + ${recentDuels[1].player1.name} + ' won by ' + ${recentDuels[1].winCondition}"></span>
+                <span th:if="${recentDuels[1].result == 2}" th:text="'Result: ' + ${recentDuels[1].player2.name} + ' won by ' + ${recentDuels[1].winCondition}"></span>
+                <span th:if="${recentDuels[1].result == 0}" th:text="'Result: Draw by ' + ${recentDuels[1].winCondition}"></span>
             </div>
             <div class="duel">
-                <span>Player Three (Deck Three) vs Player Four (Deck Four)</span>
-                <span>Result: Player Four Wins by Deck Out</span>
+                <span th:text="${recentDuels[2].player1.name} + ' (' + ${recentDuels[2].deck1.name} + ') ' + ' VS ' + ${recentDuels[2].player2.name} + ' (' + ${recentDuels[2].deck2.name} + ') '"></span>
+                <span th:if="${recentDuels[2].result == 1}" th:text="'Result: ' + ${recentDuels[2].player1.name} + ' won by ' + ${recentDuels[2].winCondition}"></span>
+                <span th:if="${recentDuels[2].result == 2}" th:text="'Result: ' + ${recentDuels[2].player2.name} + ' won by ' + ${recentDuels[2].winCondition}"></span>
+                <span th:if="${recentDuels[2].result == 0}" th:text="'Result: Draw by ' + ${recentDuels[2].winCondition}"></span>
             </div>
             <div class="duel">
-                <span>Player Three (Deck Three) vs Player Four (Deck Four)</span>
-                <span>Result: Player Four Wins by Deck Out</span>
+                <span th:text="${recentDuels[3].player1.name} + ' (' + ${recentDuels[3].deck1.name} + ') ' + ' VS ' + ${recentDuels[3].player2.name} + ' (' + ${recentDuels[3].deck2.name} + ') '"></span>
+                <span th:if="${recentDuels[3].result == 1}" th:text="'Result: ' + ${recentDuels[3].player1.name} + ' won by ' + ${recentDuels[3].winCondition}"></span>
+                <span th:if="${recentDuels[3].result == 2}" th:text="'Result: ' + ${recentDuels[3].player2.name} + ' won by ' + ${recentDuels[3].winCondition}"></span>
+                <span th:if="${recentDuels[3].result == 0}" th:text="'Result: Draw by ' + ${recentDuels[3].winCondition}"></span>
             </div>
             <div class="duel">
-                <span>Player Three (Deck Three) vs Player Four (Deck Four)</span>
-                <span>Result: Player Four Wins by Deck Out</span>
+                <span th:text="${recentDuels[4].player1.name} + ' (' + ${recentDuels[4].deck1.name} + ') ' + ' VS ' + ${recentDuels[4].player2.name} + ' (' + ${recentDuels[4].deck2.name} + ') '"></span>
+                <span th:if="${recentDuels[4].result == 1}" th:text="'Result: ' + ${recentDuels[4].player1.name} + ' won by ' + ${recentDuels[4].winCondition}"></span>
+                <span th:if="${recentDuels[4].result == 2}" th:text="'Result: ' + ${recentDuels[4].player2.name} + ' won by ' + ${recentDuels[4].winCondition}"></span>
+                <span th:if="${recentDuels[4].result == 0}" th:text="'Result: Draw by ' + ${recentDuels[4].winCondition}"></span>
             </div>
         </div>
     </section>

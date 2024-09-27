@@ -1,5 +1,6 @@
 package com.k.arsov.ygolocalleaderboard.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -15,13 +16,14 @@ public class Deck {
     @Column(name="name")
     private String name;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH})
     @JoinTable(
             name = "deck_set_card",
             joinColumns = @JoinColumn(name = "deck_id"),
             inverseJoinColumns = @JoinColumn(name = "set_card_id")
     )
     private List<SetCard> setCards;
+
 
     public Deck()
     {
@@ -58,6 +60,11 @@ public class Deck {
     public void setDeckCards(List<SetCard> setCards) {
         this.setCards = setCards;
     }
+
+    public void setSetCards(List<SetCard> setCards) {
+        this.setCards = setCards;
+    }
+
 
     @Override
     public String toString() {

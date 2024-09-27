@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>View Deck</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <h1>YGOLocalLeaderboard</h1>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/players">Players</a></li>
+            <li><a href="/decks">Decks</a></li>
+            <li><a href="/duels">Duels</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+<h1>Deck Details</h1>
+<p>ID: <span th:text="${deckDTO.deck.id}"></span></p>
+<p>Name: <span th:text="${deckDTO.deck.name}"></span></p>
+
+<h2>Cards in this Deck</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Set Code</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Rarity</th>
+        <th>Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Iterate over the list of cards -->
+    <tr th:each="card : ${deckDTO.deck.setCards}">
+        <td><div><a th:text="${card.setCode}"></a></div><div><img th:src="@{'/api/images/' + ${card.effectiveCard.cardImages.get(deckDTO.deck.setCards[0].artwork).id}}" alt="Sample Image" style="width: 50px; height: auto;"></div></td>
+        <td th:text="${card.effectiveCard.name}"></td>
+        <td th:text="${card.effectiveCard.description}"></td>
+        <td th:text="${card.setRarity}"></td>
+        <td th:text="${card.setPrice}"></td>
+    </tr>
+    </tbody>
+</table>
+
+    <h2>Win Rates by Player</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Player</th>
+            <th>Total Duels</th>
+            <th>Win Rate</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="pdwr : ${deckDTO.playerDeckWinRates}">
+            <td th:text="${playersMap[pdwr.playerId].name}"></td>
+            <td th:text="${pdwr.totalDuels}"></td>
+            <td th:text="${pdwr.winRate}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+<a href="/decks">Back to Deck List</a>
+</main>
+</body>
+</html>

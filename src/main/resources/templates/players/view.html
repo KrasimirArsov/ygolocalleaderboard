@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>View Deck</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <h1>YGOLocalLeaderboard</h1>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/players">Players</a></li>
+            <li><a href="/decks">Decks</a></li>
+            <li><a href="/duels">Duels</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+<h1>Player Details</h1>
+<p>ID: <span th:text="${playerDTO.player.id}"></span></p>
+<p>Name: <span th:text="${playerDTO.player.name}"></span></p>
+
+    <h2>Win Rates by Deck</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Deck</th>
+            <th>Total Duels</th>
+            <th>Win Rate</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Iterate over the list of cards -->
+        <tr th:each="pdwr : ${playerDTO.playerDeckWinRates}">
+            <td th:text="${decksMap[pdwr.deckId].name}"></td>
+            <td th:text="${pdwr.totalDuels}"></td>
+            <td th:text="${pdwr.winRate}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+<a href="/players">Back to Player List</a>
+</main>
+</body>
+</html>

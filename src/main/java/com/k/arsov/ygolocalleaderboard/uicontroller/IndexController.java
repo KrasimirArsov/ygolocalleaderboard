@@ -1,9 +1,8 @@
 package com.k.arsov.ygolocalleaderboard.uicontroller;
 
-import com.k.arsov.ygolocalleaderboard.entity.Deck;
-import com.k.arsov.ygolocalleaderboard.entity.DeckWinLossDrawRatio;
+import com.k.arsov.ygolocalleaderboard.entity.sqlviewentities.DeckWinLossDrawRatio;
 import com.k.arsov.ygolocalleaderboard.entity.Duel;
-import com.k.arsov.ygolocalleaderboard.entity.PlayerWinLossDrawRatio;
+import com.k.arsov.ygolocalleaderboard.entity.sqlviewentities.PlayerWinLossDrawRatio;
 import com.k.arsov.ygolocalleaderboard.service.DeckService;
 import com.k.arsov.ygolocalleaderboard.service.DuelService;
 import com.k.arsov.ygolocalleaderboard.service.PlayerService;
@@ -35,8 +34,8 @@ public class IndexController
         List<PlayerWinLossDrawRatio> playerWLDRatios = playerService.findTopPlayerWinLossDrawRatio(3);
         model.addAttribute("playerWLDRatios", playerWLDRatios);
 
-        List<Duel> mostRecentDuels = duelService.findAllMostRecent(5);
-        model.addAttribute("playerWLDRatios", playerWLDRatios);
+        List<Duel> mostRecentDuels = duelService.findMostRecent(5);
+        model.addAttribute("recentDuels", mostRecentDuels);
 
         return "index";
     }

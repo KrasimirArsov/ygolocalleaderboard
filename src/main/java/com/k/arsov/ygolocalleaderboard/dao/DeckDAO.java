@@ -1,7 +1,8 @@
 package com.k.arsov.ygolocalleaderboard.dao;
 
 import com.k.arsov.ygolocalleaderboard.entity.Deck;
-import com.k.arsov.ygolocalleaderboard.entity.DeckWinLossDrawRatio;
+import com.k.arsov.ygolocalleaderboard.entity.sqlviewentities.DeckWinLossDrawRatio;
+import com.k.arsov.ygolocalleaderboard.entity.sqlviewentities.PlayerDeckWinRate;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,16 @@ public class DeckDAO
         return theDeck;
     }
 
+    public Deck findByName(String theName) {
+        //create query
+        TypedQuery<Deck> theQuery = entityManager.createQuery("from Deck where name='" + theName + "'", Deck.class);
+
+        //execute query
+        Deck theDeck = theQuery.getResultList().get(0);
+
+        return theDeck;
+    }
+
     public Deck save(Deck theDeck) {
         Deck dbDeck = entityManager.merge(theDeck);
 
@@ -51,7 +62,7 @@ public class DeckDAO
 
     public List<DeckWinLossDrawRatio> findAllWinLossDrawRatio() {
         //create query
-        TypedQuery<DeckWinLossDrawRatio> theQuery = entityManager.createQuery("from DeckWinLossDrawRatio d ORDER BY d.winRatio DESC", DeckWinLossDrawRatio.class);
+        TypedQuery<DeckWinLossDrawRatio> theQuery = entityManager.createQuery("from DeckWinLossDrawRatio d where d.totalDuels >=3 ORDER BY d.winRatio DESC", DeckWinLossDrawRatio.class);
 
         //execute query
         List<DeckWinLossDrawRatio> decksWLDRatios = theQuery.getResultList();
@@ -64,5 +75,14 @@ public class DeckDAO
         DeckWinLossDrawRatio theDecksWLDRatio = entityManager.find(DeckWinLossDrawRatio.class, theId);
 
         return theDecksWLDRatio;
+    }
+
+    public List<PlayerDeckWinRate> findAllPlayerDeckWinRateByDeckId(int theDeckId)
+    {
+        TypedQuery<PlayerDeckWinRate> theQuery = entityManager.createQuery("from PlayerDeckWinRate p where p.deckId=" + theDeckId + " ORDER BY p.winRate DESC", PlayerDeckWinRate.class);
+
+        List<PlayerDeckWinRate> deckWinRatesByPlayers = theQuery.getResultList();
+
+        return deckWinRatesByPlayers;
     }
 }

@@ -28,19 +28,20 @@
     <table>
         <thead>
         <tr>
-            <th>ID</th>
-            <th>Name</th>
+            <th>Face Card</th>
+            <th>Details</th>
             <th>Actions</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="deck : ${decks}">
-            <td th:text="${deck.id}"></td>
-            <td th:text="${deck.name}"></td>
+            <td><img th:src="@{'/api/images/' + ${deck.setCards[0].effectiveCard.cardImages.get(deck.setCards[0].artwork).id}}" alt="Sample Image" style="width: 100px; height: auto;"></td>
             <td>
-                <a th:href="@{/decks/{id}(id=${deck.id})}" class="btn">View</a>
-                <a th:href="@{/decks/edit/{id}(id=${deck.id})}" class="btn">Edit</a>
-                <a th:href="@{/decks/delete/{id}(id=${deck.id})}" class="btn btn-danger">Delete</a>
+                <h3 th:text="${deck.name}"></h3>
+                <a th:text="'Deck Size: ' + ${#lists.size(deck.setCards)}"></a>
+            </td>
+            <td>
+                <a th:href="@{/decks/{name}(name=${deck.name})}" class="btn">View</a>
             </td>
         </tr>
         </tbody>

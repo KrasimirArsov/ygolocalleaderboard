@@ -1,8 +1,8 @@
 package com.k.arsov.ygolocalleaderboard.dao;
 
-import com.k.arsov.ygolocalleaderboard.entity.DeckWinLossDrawRatio;
 import com.k.arsov.ygolocalleaderboard.entity.Player;
-import com.k.arsov.ygolocalleaderboard.entity.PlayerWinLossDrawRatio;
+import com.k.arsov.ygolocalleaderboard.entity.sqlviewentities.PlayerDeckWinRate;
+import com.k.arsov.ygolocalleaderboard.entity.sqlviewentities.PlayerWinLossDrawRatio;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +38,15 @@ public class PlayerDAO
         return thePlayer;
     }
 
+    public Player findByName(String theName) {
+        //create query
+        TypedQuery<Player> theQuery = entityManager.createQuery("from Player where name='" + theName + "'", Player.class);
+
+        Player thePlayer = theQuery.getResultList().get(0);
+
+        return thePlayer;
+    }
+
     public Player save(Player thePlayer) {
         Player dbPlayer = entityManager.merge(thePlayer);
 
@@ -65,5 +74,14 @@ public class PlayerDAO
         PlayerWinLossDrawRatio thePlayersWLDRatio = entityManager.find(PlayerWinLossDrawRatio.class, theId);
 
         return thePlayersWLDRatio;
+    }
+
+    public List<PlayerDeckWinRate> findAllPlayerDeckWinRateByPlayerId(int thePlayerId)
+    {
+        TypedQuery<PlayerDeckWinRate> theQuery = entityManager.createQuery("from PlayerDeckWinRate p where p.playerId=" + thePlayerId + " ORDER BY p.winRate DESC", PlayerDeckWinRate.class);
+
+        List<PlayerDeckWinRate> playerWinRatesByDeck = theQuery.getResultList();
+
+        return playerWinRatesByDeck;
     }
 }

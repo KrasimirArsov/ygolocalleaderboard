@@ -13,8 +13,9 @@ import java.util.List;
 @Table(name="set_card")
 public class SetCard
 {
-    @Column(name="name")
-    private String name;
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.DETACH})
+    @JoinColumn(name = "name")
+    private EffectiveCard effectiveCard;
 
     @JsonProperty("set_name")
     @Column(name="set_name")
@@ -33,25 +34,29 @@ public class SetCard
     @JsonProperty("set_price")
     private double setPrice;
 
+    @Column(name="artwork")
+    @JsonProperty("artwork")
+    private int artwork;
+
     public SetCard()
     {
 
     }
 
-    public SetCard(String name, String setName, String setCode, String setRarity, double setPrice) {
-        this.name = name;
+    public SetCard(EffectiveCard effectiveCard, String setName, String setCode, String setRarity, double setPrice) {
+        this.effectiveCard = effectiveCard;
         this.setName = setName;
         this.setCode = setCode;
         this.setRarity = setRarity;
         this.setPrice = setPrice;
     }
 
-    public String getName() {
-        return name;
+    public EffectiveCard getEffectiveCard() {
+        return effectiveCard;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setEffectiveCard(EffectiveCard effectiveCard) {
+        this.effectiveCard = effectiveCard;
     }
 
     public String getSetName() {
@@ -86,10 +91,17 @@ public class SetCard
         this.setPrice = setPrice;
     }
 
+    public int getArtwork() {
+        return artwork;
+    }
+
+    public void setArtwork(int artwork) {
+        this.artwork = artwork;
+    }
+
     @Override
     public String toString() {
         return "SetCardDetails{" +
-                "name='" + name + '\'' +
                 ", setName='" + setName + '\'' +
                 ", setCode='" + setCode + '\'' +
                 ", setRarity='" + setRarity + '\'' +
