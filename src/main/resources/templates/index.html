@@ -105,40 +105,50 @@
             </li>
         </ul>
     </section>
-    <section class="stats">
-        <h2>Recent Duels</h2>
-        <div class="duel-list">
-            <div class="duel">
-                <span th:text="${recentDuels[0].player1.name} + ' (' + ${recentDuels[0].deck1.name} + ') ' + ' VS ' + ${recentDuels[0].player2.name} + ' (' + ${recentDuels[0].deck2.name} + ') '"></span>
-                <span th:if="${recentDuels[0].result == 1}" th:text="'Result: ' + ${recentDuels[0].player1.name} + ' won by ' + ${recentDuels[0].winCondition}"></span>
-                <span th:if="${recentDuels[0].result == 2}" th:text="'Result: ' + ${recentDuels[0].player2.name} + ' won by ' + ${recentDuels[0].winCondition}"></span>
-                <span th:if="${recentDuels[0].result == 0}" th:text="'Result: Draw by ' + ${recentDuels[0].winCondition}"></span>
-            </div>
-            <div class="duel">
-                <span th:text="${recentDuels[1].player1.name} + ' (' + ${recentDuels[1].deck1.name} + ') ' + ' VS ' + ${recentDuels[1].player2.name} + ' (' + ${recentDuels[1].deck2.name} + ') '"></span>
-                <span th:if="${recentDuels[1].result == 1}" th:text="'Result: ' + ${recentDuels[1].player1.name} + ' won by ' + ${recentDuels[1].winCondition}"></span>
-                <span th:if="${recentDuels[1].result == 2}" th:text="'Result: ' + ${recentDuels[1].player2.name} + ' won by ' + ${recentDuels[1].winCondition}"></span>
-                <span th:if="${recentDuels[1].result == 0}" th:text="'Result: Draw by ' + ${recentDuels[1].winCondition}"></span>
-            </div>
-            <div class="duel">
-                <span th:text="${recentDuels[2].player1.name} + ' (' + ${recentDuels[2].deck1.name} + ') ' + ' VS ' + ${recentDuels[2].player2.name} + ' (' + ${recentDuels[2].deck2.name} + ') '"></span>
-                <span th:if="${recentDuels[2].result == 1}" th:text="'Result: ' + ${recentDuels[2].player1.name} + ' won by ' + ${recentDuels[2].winCondition}"></span>
-                <span th:if="${recentDuels[2].result == 2}" th:text="'Result: ' + ${recentDuels[2].player2.name} + ' won by ' + ${recentDuels[2].winCondition}"></span>
-                <span th:if="${recentDuels[2].result == 0}" th:text="'Result: Draw by ' + ${recentDuels[2].winCondition}"></span>
-            </div>
-            <div class="duel">
-                <span th:text="${recentDuels[3].player1.name} + ' (' + ${recentDuels[3].deck1.name} + ') ' + ' VS ' + ${recentDuels[3].player2.name} + ' (' + ${recentDuels[3].deck2.name} + ') '"></span>
-                <span th:if="${recentDuels[3].result == 1}" th:text="'Result: ' + ${recentDuels[3].player1.name} + ' won by ' + ${recentDuels[3].winCondition}"></span>
-                <span th:if="${recentDuels[3].result == 2}" th:text="'Result: ' + ${recentDuels[3].player2.name} + ' won by ' + ${recentDuels[3].winCondition}"></span>
-                <span th:if="${recentDuels[3].result == 0}" th:text="'Result: Draw by ' + ${recentDuels[3].winCondition}"></span>
-            </div>
-            <div class="duel">
-                <span th:text="${recentDuels[4].player1.name} + ' (' + ${recentDuels[4].deck1.name} + ') ' + ' VS ' + ${recentDuels[4].player2.name} + ' (' + ${recentDuels[4].deck2.name} + ') '"></span>
-                <span th:if="${recentDuels[4].result == 1}" th:text="'Result: ' + ${recentDuels[4].player1.name} + ' won by ' + ${recentDuels[4].winCondition}"></span>
-                <span th:if="${recentDuels[4].result == 2}" th:text="'Result: ' + ${recentDuels[4].player2.name} + ' won by ' + ${recentDuels[4].winCondition}"></span>
-                <span th:if="${recentDuels[4].result == 0}" th:text="'Result: Draw by ' + ${recentDuels[4].winCondition}"></span>
-            </div>
-        </div>
+    <section>
+        <table>
+            <thead>
+            <tr>
+                <th>First Player</th>
+                <th>First Deck</th>
+                <th>Second Player</th>
+                <th>Second Deck</th>
+                <th>Win Condition</th>
+                <th>Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="duel : ${duels}">
+                <!-- First Player & Deck -->
+                <td th:class="${duel.result == 1} ? 'green' : (${duel.result == 2} ? 'red' : 'blue')">
+                    <div><img th:src="@{'/api/images/avatar/' + ${duel.player1.avatar.name} + '/' + ${duel.result == 1 ? 'positive' : 'negative'}}"
+                              alt="Deck Image" style="width: 50px; height: auto; margin-right: 10px;"></div>
+                    <div><span th:text="${duel.player1.name}"></span></div>
+                </td>
+                <td th:class="${duel.result == 1} ? 'green' : (${duel.result == 2} ? 'red' : 'blue')">
+                    <div><img th:src="@{'/api/images/' + ${duel.deck1.setCards[0].effectiveCard.cardImages.get(duel.deck1.setCards[0].artwork).id}}"
+                              alt="Deck Image" style="width: 50px; height: auto; margin-right: 10px;"></div>
+                    <div><span th:text="${duel.deck1.name}"></span></div>
+                </td>
+
+                <!-- Second Player & Deck -->
+                <td th:class="${duel.result == 2} ? 'green' : (${duel.result == 1} ? 'red' : 'blue')">
+                    <div><img th:src="@{'/api/images/avatar/' + ${duel.player2.avatar.name} + '/' + ${duel.result == 2 ? 'positive' : 'negative'}}"
+                              alt="Deck Image" style="width: 50px; height: auto; margin-right: 10px;"></div>
+                    <div><span th:text="${duel.player2.name}"></span></div>
+                </td>
+                <td th:class="${duel.result == 2} ? 'green' : (${duel.result == 1} ? 'red' : 'blue')">
+                    <div><img th:src="@{'/api/images/' + ${duel.deck2.setCards[0].effectiveCard.cardImages.get(duel.deck2.setCards[0].artwork).id}}"
+                              alt="Deck Image" style="width: 50px; height: auto; margin-right: 10px;"></div>
+                    <div><span th:text="${duel.deck2.name}"></span></div>
+                </td>
+
+                <!-- Win Condition, Date -->
+                <td th:text="${duel.winCondition}"></td>
+                <td th:text="${duel.duelDate}"></td>
+            </tr>
+            </tbody>
+        </table>
     </section>
 </main>
 

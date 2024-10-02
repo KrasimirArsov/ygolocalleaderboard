@@ -115,11 +115,11 @@ public class Duel
         this.winCondition = winCondition;
     }
 
-    public Timestamp getDate() {
+    public Timestamp getDuelDate() {
         return duelDate;
     }
 
-    public void setDate(Timestamp timestamp) {
+    public void setDuelDate(Timestamp timestamp) {
         this.duelDate = timestamp;
     }
 }

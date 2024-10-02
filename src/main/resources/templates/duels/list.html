@@ -23,7 +23,7 @@
 
 <main>
     <h1>Duels</h1>
-    <a href="/duels/new" class="btn">Add a new Duel</a>
+    <a href="/duels/create" class="btn">Add a new Duel</a>
 
     <table>
         <thead>
@@ -32,20 +32,39 @@
             <th>First Deck</th>
             <th>Second Player</th>
             <th>Second Deck</th>
-            <th>Result</th>
             <th>Win Condition</th>
             <th>Date</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="duel : ${duels}">
-            <td th:text="${duel.player1.name}"></td>
-            <td th:text="${duel.deck1.name}"></td>
-            <td th:text="${duel.player2.name}"></td>
-            <td th:text="${duel.deck2.name}"></td>
-            <td th:text="${duel.result}"></td>
+            <!-- First Player & Deck -->
+            <td th:class="${duel.result == 1} ? 'green' : (${duel.result == 2} ? 'red' : 'blue')">
+                <div><img th:src="@{'/api/images/avatar/' + ${duel.player1.avatar.name} + '/' + ${duel.result == 1 ? 'positive' : 'negative'}}"
+                          alt="Deck Image" style="width: 50px; height: auto; margin-right: 10px;"></div>
+                <div><span th:text="${duel.player1.name}"></span></div>
+            </td>
+            <td th:class="${duel.result == 1} ? 'green' : (${duel.result == 2} ? 'red' : 'blue')">
+                <div><img th:src="@{'/api/images/' + ${duel.deck1.setCards[0].effectiveCard.cardImages.get(duel.deck1.setCards[0].artwork).id}}"
+                     alt="Deck Image" style="width: 50px; height: auto; margin-right: 10px;"></div>
+                <div><span th:text="${duel.deck1.name}"></span></div>
+            </td>
+
+            <!-- Second Player & Deck -->
+            <td th:class="${duel.result == 2} ? 'green' : (${duel.result == 1} ? 'red' : 'blue')">
+                <div><img th:src="@{'/api/images/avatar/' + ${duel.player2.avatar.name} + '/' + ${duel.result == 2 ? 'positive' : 'negative'}}"
+                          alt="Deck Image" style="width: 50px; height: auto; margin-right: 10px;"></div>
+                <div><span th:text="${duel.player2.name}"></span></div>
+            </td>
+            <td th:class="${duel.result == 2} ? 'green' : (${duel.result == 1} ? 'red' : 'blue')">
+                <div><img th:src="@{'/api/images/' + ${duel.deck2.setCards[0].effectiveCard.cardImages.get(duel.deck2.setCards[0].artwork).id}}"
+                          alt="Deck Image" style="width: 50px; height: auto; margin-right: 10px;"></div>
+                <div><span th:text="${duel.deck2.name}"></span></div>
+            </td>
+
+            <!-- Win Condition, Date -->
             <td th:text="${duel.winCondition}"></td>
-            <td th:text="${duel.dateDate}"></td>
+            <td th:text="${duel.duelDate}"></td>
         </tr>
         </tbody>
     </table>

@@ -8,6 +8,7 @@ import com.k.arsov.ygolocalleaderboard.entity.sqlviewentities.PlayerWinLossDrawR
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -77,6 +78,18 @@ public class PlayerService implements CRUDService<Player>
         playerDTO.setPlayerDeckWinRates(playerDAO.findAllPlayerDeckWinRateByPlayerId(playerDTO.getPlayer().getId()));
 
         return playerDTO;
+    }
+
+    public List<PlayerDTO> getAllPlayerDTOs()
+    {
+        List<PlayerDTO> playerDTOs = new ArrayList<>();
+
+        for(Player player : findAll())
+        {
+            playerDTOs.add(getPlayerDTOById(player.getId()));
+        }
+
+        return playerDTOs;
     }
 
     public Map<Integer,Player> getAllPlayersAsMap()

@@ -27,7 +27,7 @@ public class PlayerController
     @GetMapping("/players")
     public String listPlayers(Model model)
     {
-        List<Player> playerList = playerService.findAll();
+        List<PlayerDTO> playerList = playerService.getAllPlayerDTOs();
         model.addAttribute("playerList", playerList);
 
         return "players/list";

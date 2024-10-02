@@ -18,7 +18,7 @@ public class ImageService {
 
     public ImageService() {
         // Set the base directory where images are stored (you can configure this path)
-        this.imageStorageLocation = Paths.get("E:\\YGOLocalLeaderboardImages\\card_image_small").toAbsolutePath().normalize();
+        this.imageStorageLocation = Paths.get("E:\\YGOLocalLeaderboardImages\\").toAbsolutePath().normalize();
     }
 
     /**

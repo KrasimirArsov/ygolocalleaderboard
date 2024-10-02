@@ -29,15 +29,21 @@
     <table>
         <thead>
         <tr>
-            <th>Deck</th>
+            <th style="width: 1%;">Face Card</th>
+            <th>Deck Name</th>
             <th>Total Duels</th>
             <th>Win Rate</th>
         </tr>
         </thead>
         <tbody>
         <!-- Iterate over the list of cards -->
-        <tr th:each="pdwr : ${playerDTO.playerDeckWinRates}">
-            <td th:text="${decksMap[pdwr.deckId].name}"></td>
+        <tr th:each="pdwr : ${playerDTO.playerDeckWinRates}" style="padding: 10px;">
+            <td>
+                <img th:src="@{'/api/images/' + ${decksMap[pdwr.deckId].setCards[0].effectiveCard.cardImages.get(decksMap[pdwr.deckId].setCards[0].artwork).id}}" alt="Sample Image" style="width: 40px; height: auto;">
+            </td>
+            <td>
+                 <span th:text="${decksMap[pdwr.deckId].name}"></span>
+            </td>
             <td th:text="${pdwr.totalDuels}"></td>
             <td th:text="${pdwr.winRate}"></td>
         </tr>

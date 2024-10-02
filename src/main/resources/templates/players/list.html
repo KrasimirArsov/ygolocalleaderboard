@@ -22,26 +22,33 @@
 </header>
 
 <main>
-    <h1>Players</h1>
-    <a href="/decks/new" class="btn">Create New Deck</a>
-
     <table>
         <thead>
         <tr>
-            <th>Avatar</th>
-            <th>Name</th>
-            <th>Actions</th>
+            <th style="width: 1%;">Avatar</th> <!-- Set a narrow width -->
+            <th>Details</th>
+            <th style="width: 1%;">Actions</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="player : ${playerList}">
-            <td th:text="${player.id}"></td>
-            <td th:text="${player.name}"></td>
+        <tr th:each="playerDTO : ${playerList}">
+            <td style="width: 1%; padding: 0;"> <!-- Minimize width to fit the image -->
+                <img th:src="@{'/api/images/avatar/' + ${playerDTO.player.avatar.name} + '/' + 'neutral'}"
+                     alt="Avatar Image"
+                     style="width: auto; height: 150px; object-fit: contain;">
+            </td>
             <td>
-                <a th:href="@{/players/{name}(name=${player.name})}" class="btn">View</a>
+                <h3 th:text="${playerDTO.player.name}"></h3>
+                <div class="graphThicker">
+                    <div class="win" th:style="'width: ' + ${playerDTO.playerWinLossDrawRatio.winRatio*100} + '%;'"></div> <!-- Win Rate -->
+                    <div class="loss" th:style="'width: ' + ${playerDTO.playerWinLossDrawRatio.lossRatio*100} + '%; left: ' + ${playerDTO.playerWinLossDrawRatio.winRatio*100} + '%;'"></div> <!-- Loss Rate -->
+                    <div class="draw" th:style="'width: ' + ${playerDTO.playerWinLossDrawRatio.drawRatio*100} + '%; left: ' + (${playerDTO.playerWinLossDrawRatio.winRatio*100} + ${playerDTO.playerWinLossDrawRatio.lossRatio*100}) + '%;'"></div> <!-- Draw Rate -->
+                </div>
+            </td>
+            <td>
+                <a th:href="@{/players/{name}(name=${playerDTO.player.name})}" class="btn">View</a>
             </td>
         </tr>
-
         </tbody>
     </table>
 </main>

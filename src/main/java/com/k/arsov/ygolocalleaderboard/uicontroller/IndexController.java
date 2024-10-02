@@ -35,7 +35,7 @@ public class IndexController
         model.addAttribute("playerWLDRatios", playerWLDRatios);
 
         List<Duel> mostRecentDuels = duelService.findMostRecent(5);
-        model.addAttribute("recentDuels", mostRecentDuels);
+        model.addAttribute("duels", mostRecentDuels);
 
         return "index";
     }

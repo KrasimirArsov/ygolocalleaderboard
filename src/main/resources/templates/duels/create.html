@@ -1,15 +1,81 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Create Deck</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+    <title>Create a New Duel</title>
 </head>
 <body>
-<h1>Create New Deck</h1>
-<form action="/decks" method="post">
-    <label for="name">Deck Name</label>
-    <input type="text" id="name" name="name" th:value="${deck.name}" />
-    <button type="submit">Create Deck</button>
-</form>
+<header>
+    <div class="logo">
+        <h1>Create a New Duel</h1>
+    </div>
+</header>
+
+<main>
+    <form th:action="@{/duels/save}" th:object="${duel}" method="post">
+        <div class="form-group">
+            <label for="player1">Player 1:</label>
+            <select id="player1" th:field="*{player1Id}">
+                <option th:if="${duel.player1 == null}" value="" disabled selected>Select Player 1</option>
+                <option th:each="player : ${players}" th:value="${player.id}" th:text="${player.name}"></option>
+            </select>
+            <div th:if="${#fields.hasErrors('player1Id')}" th:errors="*{player1Id}"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="deck1">Deck 1:</label>
+            <select id="deck1" th:field="*{deck1Id}">
+                <option th:if="${duel.deck1 == null}" value="" disabled selected>Select Deck 1</option>
+                <option th:each="deck : ${decks}" th:value="${deck.id}" th:text="${deck.name}"></option>
+            </select>
+            <div th:if="${#fields.hasErrors('deck1Id')}" th:errors="*{deck1Id}"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="player2">Player 2:</label>
+            <select id="player2" th:field="*{player2Id}">
+                <option th:if="${duel.player2 == null}" value="" disabled selected>Select Player 2</option>
+                <option th:each="player : ${players}" th:value="${player.id}" th:text="${player.name}"></option>
+            </select>
+            <div th:if="${#fields.hasErrors('player2Id')}" th:errors="*{player2Id}"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="deck2">Deck 2:</label>
+            <select id="deck2" th:field="*{deck2Id}">
+                <option th:if="${duel.deck2 == null}" value="" disabled selected>Select Deck 2</option>
+                <option th:each="deck : ${decks}" th:value="${deck.id}" th:text="${deck.name}"></option>
+            </select>
+            <div th:if="${#fields.hasErrors('deck2Id')}" th:errors="*{deck2Id}"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="result">Result:</label>
+            <select id="result" th:field="*{result}">
+                <option th:if="${duel.result == null}" value="" disabled selected>Select Result</option>
+                <option value="1">Player 1 Wins</option>
+                <option value="2">Player 2 Wins</option>
+                <option value="3">Draw</option>
+            </select>
+            <div th:if="${#fields.hasErrors('result')}" th:errors="*{result}"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="winCondition">Win Condition:</label>
+            <select id="winCondition" th:field="*{winCondition}">
+                <option th:if="${duel.winCondition == null}" value="" disabled selected>Select Win Condition</option>
+                <option th:each="condition : ${winConditions}" th:value="${condition}" th:text="${condition}"></option>
+            </select>
+            <div th:if="${#fields.hasErrors('winCondition')}" th:errors="*{winCondition}"></div>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn">Save Duel</button>
+        </div>
+    </form>
+</main>
+
+<footer>
+    <p>&copy; 2024 Duel Leaderboard. All Rights Reserved.</p>
+</footer>
 </body>
 </html>

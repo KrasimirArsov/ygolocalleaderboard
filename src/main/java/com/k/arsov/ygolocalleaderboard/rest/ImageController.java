@@ -18,8 +18,16 @@ public class ImageController {
     private ImageService imageService;
 
     @GetMapping("/{imageFileName}")
-    public ResponseEntity<Resource> getImageById(@PathVariable String imageFileName) {
-        Resource resource = imageService.loadImage(imageFileName);
+    public ResponseEntity<Resource> getCardImageById(@PathVariable String imageFileName) {
+        Resource resource = imageService.loadImage("card_image_small\\" + imageFileName);
+        return ResponseEntity.ok()
+                .contentType(MediaType.IMAGE_JPEG)  // Adjust content type based on your image format
+                .body(resource);
+    }
+
+    @GetMapping("/avatar/{name}/{state}")
+    public ResponseEntity<Resource> getCardImageById(@PathVariable String name, @PathVariable String state) {
+        Resource resource = imageService.loadImage("avatar_image\\" + name + "\\" + state);
         return ResponseEntity.ok()
                 .contentType(MediaType.IMAGE_JPEG)  // Adjust content type based on your image format
                 .body(resource);

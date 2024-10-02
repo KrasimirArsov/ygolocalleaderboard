@@ -1,5 +1,6 @@
 package com.k.arsov.ygolocalleaderboard.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,9 +14,11 @@ public class Player {
     @Column(name="name")
     private String name;
 
-    public Player()
-    {
+    @JsonManagedReference
+    @OneToOne(mappedBy = "player", cascade = CascadeType.ALL)
+    private Avatar avatar;
 
+    public Player() {
     }
 
     public Player(int id, String name) {
@@ -39,11 +42,20 @@ public class Player {
         this.name = name;
     }
 
+    public Avatar getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(Avatar avatar) {
+        this.avatar = avatar;
+    }
+
     @Override
     public String toString() {
         return "Player{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", avatar=" + avatar +
                 '}';
     }
 }

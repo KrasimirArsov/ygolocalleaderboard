@@ -72,6 +72,7 @@ public class SecurityConfig
                         .requestMatchers(HttpMethod.POST, "/decks").hasRole("ADMIN")
 
                         .requestMatchers(HttpMethod.GET, "/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/**").hasRole("ADMIN")
 
                         .requestMatchers(HttpMethod.GET, "/css/styles.css").hasRole("PLAYER")
         );
