@@ -22,6 +22,9 @@
 </header>
 
 <main>
+    <h1>Players</h1>
+    <a href="/players/create" class="btn">Add a new Player</a>
+
     <table>
         <thead>
         <tr>
@@ -33,9 +36,16 @@
         <tbody>
         <tr th:each="playerDTO : ${playerList}">
             <td style="width: 1%; padding: 0;"> <!-- Minimize width to fit the image -->
-                <img th:src="@{'/api/images/avatar/' + ${playerDTO.player.avatar.name} + '/' + 'neutral'}"
-                     alt="Avatar Image"
-                     style="width: auto; height: 150px; object-fit: contain;">
+                <div th:if="${playerDTO.player.avatar != null}">
+                    <img th:src="@{'/api/images/avatar/' + ${playerDTO.player.avatar.name} + '/' + 'neutral'}"
+                        alt="Avatar Image"
+                        style="width: auto; height: 150px; object-fit: contain;">
+                </div>
+                <div th:if="${playerDTO.player.avatar == null}">
+                    <img th:src="@{/api/images/avatar/Anonymous/neutral}"
+                         alt="Avatar Image"
+                         style="width: auto; height: 150px; object-fit: contain;">
+                </div>
             </td>
             <td>
                 <h3 th:text="${playerDTO.player.name}"></h3>
@@ -47,6 +57,10 @@
             </td>
             <td>
                 <a th:href="@{/players/{name}(name=${playerDTO.player.name})}" class="btn">View</a>
+                <a th:href="@{/players/edit/{id}(id=${playerDTO.player.id})}" class="btn">Edit</a>
+                <form th:action="@{/players/delete/{id}(id=${playerDTO.player.id})}" method="post" th:onsubmit="return confirm('Are you sure you want to delete this player?');">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
             </td>
         </tr>
         </tbody>

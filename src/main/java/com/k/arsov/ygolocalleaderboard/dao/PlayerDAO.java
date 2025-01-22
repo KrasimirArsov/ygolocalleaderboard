@@ -84,4 +84,10 @@ public class PlayerDAO
 
         return playerWinRatesByDeck;
     }
+
+    public List<String> getListOfAllNames()
+    {
+        TypedQuery<String> theQuery = entityManager.createQuery("SELECT p.name FROM Player p", String.class);
+        return theQuery.getResultList();
+    }
 }

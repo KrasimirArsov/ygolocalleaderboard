@@ -13,11 +13,11 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import java.sql.SQLOutput;
 
-@Configuration
+//@Configuration
 public class SecurityConfig
 {
 
-    @Bean
+    //@Bean
     public InMemoryUserDetailsManager userDetailsManager()
     {
         System.out.println("Setting up in-memory user details manager...");
@@ -37,7 +37,7 @@ public class SecurityConfig
         return new InMemoryUserDetailsManager(user1, user2);
     }
 
-    @Bean
+    //@Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception
     {
         http.authorizeHttpRequests(configurer ->
@@ -73,6 +73,7 @@ public class SecurityConfig
 
                         .requestMatchers(HttpMethod.GET, "/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/**").hasRole("ADMIN")
 
                         .requestMatchers(HttpMethod.GET, "/css/styles.css").hasRole("PLAYER")
         );

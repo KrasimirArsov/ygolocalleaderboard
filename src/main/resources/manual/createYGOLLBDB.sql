@@ -2,7 +2,18 @@ CREATE DATABASE yugioh;
 
 CREATE TABLE player(
 id int primary key auto_increment,
-name varchar(32) NOT NULL
+name varchar(32) NOT NULL,
+description VARCHAR(2048) NOT NULL DEFAULT 'No description available'
+);
+
+
+CREATE TABLE user (
+    id int AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    role VARCHAR(50) NOT NULL,
+    player_id int,
+    CONSTRAINT fk_player FOREIGN KEY (player_id) REFERENCES player(id)
 );
 
 

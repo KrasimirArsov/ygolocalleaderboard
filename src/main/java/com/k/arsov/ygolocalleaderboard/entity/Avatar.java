@@ -1,31 +1,37 @@
 package com.k.arsov.ygolocalleaderboard.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "avatar")
 public class Avatar {
 
     @Id
-    @Column(name = "name", nullable = false)
-    private String name;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
 
-    @JsonBackReference
-    @OneToOne
-    @JoinColumn(name = "player_id", referencedColumnName = "id")
-    private Player player;
+    @Column(name = "name", nullable = false, length = 32)
+    private String name;
 
     // Constructors
     public Avatar() {}
 
-    public Avatar(String name, Player player) {
+    public Avatar(int id, String name) {
+        this.id = id;
         this.name = name;
-        this.player = player;
     }
 
     // Getters and Setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
@@ -34,11 +40,11 @@ public class Avatar {
         this.name = name;
     }
 
-    public Player getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
+    @Override
+    public String toString() {
+        return "Avatar{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

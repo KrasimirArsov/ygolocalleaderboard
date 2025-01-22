@@ -97,4 +97,9 @@ public class PlayerService implements CRUDService<Player>
         return findAll().stream()
                 .collect(Collectors.toMap(Player::getId, player -> player));
     }
+
+    public List<String> getAllPlayersNames()
+    {
+        return playerDAO.getListOfAllNames();
+    }
 }
