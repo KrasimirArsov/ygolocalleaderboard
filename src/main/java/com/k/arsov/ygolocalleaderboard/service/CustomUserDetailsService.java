@@ -1,6 +1,5 @@
 package com.k.arsov.ygolocalleaderboard.service;
 
-import com.k.arsov.ygolocalleaderboard.dao.UserRepository;
 import com.k.arsov.ygolocalleaderboard.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;

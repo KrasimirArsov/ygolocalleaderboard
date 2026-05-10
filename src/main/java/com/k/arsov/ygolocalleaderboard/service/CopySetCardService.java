@@ -1,22 +1,19 @@
 package com.k.arsov.ygolocalleaderboard.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.k.arsov.ygolocalleaderboard.dao.SetCardDAO;
+import com.k.arsov.ygolocalleaderboard.repos.SetCardRepository;
 import com.k.arsov.ygolocalleaderboard.entity.SetCard;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
-import com.fasterxml.jackson.core.type.TypeReference;
-
-import java.util.List;
 
 @Service
 public class CopySetCardService
 {
 
     @Autowired
-    private SetCardDAO cardSetRepository;
+    private SetCardRepository cardSetRepository;
 
     private final RestTemplate restTemplate = new RestTemplate();
     private final ObjectMapper objectMapper = new ObjectMapper();

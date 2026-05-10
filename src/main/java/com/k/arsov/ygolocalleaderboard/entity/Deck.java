@@ -16,7 +16,7 @@ public class Deck {
     @Column(name="name")
     private String name;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
     @JoinTable(
             name = "deck_set_card",
             joinColumns = @JoinColumn(name = "deck_id"),

@@ -1,7 +1,6 @@
-package com.k.arsov.ygolocalleaderboard.dao;
+package com.k.arsov.ygolocalleaderboard.repos;
 
 import com.k.arsov.ygolocalleaderboard.entity.Avatar;
-import com.k.arsov.ygolocalleaderboard.entity.Player;
 import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

@@ -3,16 +3,13 @@ package com.k.arsov.ygolocalleaderboard.entity.sqlviewentities;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Immutable;
 
-import java.io.Serializable;
-import java.util.Objects;
-
 @Entity
 @Immutable // Hibernate annotation to mark this entity as read-only (use org.hibernate.annotations.Immutable)
 @Table(name = "player_deck_win_rate") // The name of the view in the database
-public class PlayerDeckWinRate {
+public class PlayerDeckWinRatio {
 
     @EmbeddedId
-    private PlayerDeckWinRateId id;
+    private PlayerDeckWinRatioId id;
 
     @Column(name = "player_id", nullable = false, insertable = false, updatable = false)
     private int playerId;
@@ -29,11 +26,16 @@ public class PlayerDeckWinRate {
     @Column(name = "win_rate", nullable = false)
     private double winRate;
 
-    // Constructors
-    public PlayerDeckWinRate() {
+    public String getId() {
+        return playerId + "/" + deckId;
     }
 
-    public PlayerDeckWinRate(int playerId, int deckId, long totalDuels, long wins, double winRate) {
+    // Constructors
+    public PlayerDeckWinRatio() {
+    }
+
+    public PlayerDeckWinRatio(PlayerDeckWinRatioId id, int playerId, int deckId, long totalDuels, long wins, double winRate) {
+        this.id = id;
         this.playerId = playerId;
         this.deckId = deckId;
         this.totalDuels = totalDuels;
@@ -85,6 +87,7 @@ public class PlayerDeckWinRate {
     @Override
     public String toString() {
         return "PlayerDeckWinRate{" +
+                "id=" + id +
                 "playerId=" + playerId +
                 ", deckId=" + deckId +
                 ", totalDuels=" + totalDuels +
@@ -94,47 +97,3 @@ public class PlayerDeckWinRate {
     }
 }
 
-@Embeddable
-class PlayerDeckWinRateId implements Serializable {
-    @Column(name = "player_id")
-    private int playerId;
-    @Column(name = "deck_id")
-    private int deckId;
-
-    public PlayerDeckWinRateId() {
-    }
-
-    public PlayerDeckWinRateId(int playerId, int deckId) {
-        this.playerId = playerId;
-        this.deckId = deckId;
-    }
-
-    public int getPlayerId() {
-        return playerId;
-    }
-
-    public void setPlayerId(int playerId) {
-        this.playerId = playerId;
-    }
-
-    public int getDeckId() {
-        return deckId;
-    }
-
-    public void setDeckId(int deckId) {
-        this.deckId = deckId;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PlayerDeckWinRateId that = (PlayerDeckWinRateId) o;
-        return playerId == that.playerId && deckId == that.deckId;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(playerId, deckId);
-    }
-}
